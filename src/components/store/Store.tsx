@@ -15,14 +15,26 @@ interface IStoreState{
   weight: number;
   catagory: string;
   onsale: string;
-  sold: number;
-  poster: number;
+  sold: number
 }
 
 
-export class Store extends Component<IStoreProps, IStoreState> {
+export class Store extends React.Component<IStoreProps, IStoreState> {
+  constructor(props: any){
+    super(props);
+    this.state={
+      name: 'Test',
+      description: 'test description',
+      price: 0,
+      quantity: 0,
+      weight: 0,
+      catagory: 'test',
+      onsale: 'NO!!!',
+      sold: 0
+    }
+  }
 
-  state = {
+  state:IStoreState = {
     name: 'Test',
     description: 'test description',
     price: 0,
@@ -30,8 +42,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
     weight: 0,
     catagory: 'test',
     onsale: 'NO!!!',
-    sold: 0,
-    poster: 0,
+    sold: 0
   }
 
 
