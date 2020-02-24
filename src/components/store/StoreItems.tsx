@@ -7,9 +7,9 @@ export class StoreItems extends Component {
         return (
             <div>
                 <Pane>
-                    <Pane background="tint1" padding={24} marginBottom={16}><Text>Item </Text></Pane>
+                    <Pane className="default-styles" padding={24} marginBottom={16}><Text color="#eeeeee">Item </Text></Pane>
                     <Pane >
-                        <Pane justifyContent="space-between" display='flex'background="tint2" padding={24} ><Text>Item description and $</Text> <Button marginLeft = {24}>Purchase</Button></Pane>
+                        <Pane justifyContent="space-between" display='flex' padding={24} ><Text color="#eeeeee">Item description and $</Text> <Button marginLeft = {24}>Purchase</Button></Pane>
                     </Pane>
                
                </Pane>
