@@ -16,7 +16,8 @@ interface INavbarProps {
 export class Navbar extends Component<INavbarProps> {
   render() {
     return (
-      <div className="default-styles">
+      <div className="default-styles
+      ">
         <Router>
           <Pane className="default-styles" display='flex' padding={16}  borderRadius={3}>
             <Pane flex={1} alignItems='center' display='flex'>
