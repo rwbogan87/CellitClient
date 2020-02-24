@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Login.css'
-import { Pane, FormField, Button, Label, TextInput } from 'evergreen-ui';
+import { Pane, FormField, TextInput } from 'evergreen-ui';
 
 export class Login extends Component {
     render() {

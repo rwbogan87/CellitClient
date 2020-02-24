@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Signup.css';
-import { Pane, FormField, Button, Label, TextInput } from 'evergreen-ui';
+import { Pane, FormField, TextInput } from 'evergreen-ui';
 
 export class Signup extends Component {
     render() {
@@ -8,50 +8,32 @@ export class Signup extends Component {
             <Pane>
                 <FormField className = "Signupform">
                     <h3>Create Account</h3>
-                <TextInput
-                width = "20em"
-                className = "signupinputs"
-                placeholder = "First Name"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "First Name"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
                 <br /><br />
-                <TextInput 
-                width = "20em" 
-                className = "signupinputs" 
-                placeholder = "Last Name"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "Last Name"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
                 <br /><br />
-                <TextInput 
-                width = "20em" 
-                className = "signupinputs" 
-                placeholder = "Email Address"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "Email Address"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
                 <br /><br />
-                <TextInput 
-                width = "20em" 
-                className = "signupinputs" 
-                placeholder = "Password"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "Password"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
                 <br /><br />
-                <TextInput 
-                width = "20em" 
-                className = "signupinputs" 
-                placeholder = "Shipping"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "Shipping"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
                 <br /><br />
-                <TextInput 
-                width = "20em" 
-                className = "signupinputs" 
-                placeholder = "Shipping2"
+                <TextInput width = "20em" className = "signupinputs" placeholder = "Shipping2"
                     // onchange={e=>this.setState({ value: e.target.value })}
                     // value={state.value}
                 />
