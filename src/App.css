@@ -1,5 +1,5 @@
 .default-styles {
-  text-align: center;
+  /* text-align: center; */
   color: var(--white-color);
   background-color: var(--dark-color);
 }
@@ -55,7 +55,17 @@ ul {
   list-style: none;
 }
 
+.item{
+  border-bottom-style: solid; 
+  border-bottom-color: var(--white-color);
+  border-bottom-width: 4px;
+}
+
 .footer{
-  min-height: auto;
+  min-height: 20vh;
   color: var(--white-color);
+}
+img{
+  display: block;
+  margin-bottom:20px ;
 }

@@ -29,6 +29,7 @@ class App extends React.Component<IAppProps, IAppState> {
         <Pane className='App default-styles'>
           <Router />
           <Navbar
+          
             logit={this.logit}
             will={this.state.will}
             test={this.state.test}
