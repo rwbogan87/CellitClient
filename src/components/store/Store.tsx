@@ -1,8 +1,44 @@
 import React, { Component } from 'react';
 import { Pane, Button, Heading } from 'evergreen-ui';
 import Items from "./StoreItems";
+import { string } from 'prop-types';
 
-export class Store extends Component {
+interface IStoreProps{
+
+}
+
+interface IStoreState{
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  weight: number;
+  catagory: string;
+  onsale: string;
+  sold: number;
+  poster: number;
+}
+
+
+export class Store extends Component<IStoreProps, IStoreState> {
+
+  state = {
+    name: 'Test',
+    description: 'test description',
+    price: 0,
+    quantity: 0,
+    weight: 0,
+    catagory: 'test',
+    onsale: 'NO!!!',
+    sold: 0,
+    poster: 0,
+  }
+
+
+mapItems=()=>{
+
+}
+
   render() {
     return (
       <Pane>
