@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+// import AboutItem from './AboutItem';
 
-export class About extends Component {
+interface AboutProps {
+  will: string;
+}
+
+export class About extends Component<AboutProps> {
   render() {
-    return <div>About</div>;
+    return <div>{this.props.will}</div>;
   }
 }
 
-export default About; 
+export default About;
