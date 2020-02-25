@@ -72,7 +72,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
   };
 
   mapper = (json: any) => {
-    if (json !== undefined) {
+    if (json===[]) {
       return json.map((item: any) => {
         console.log(item);
         return (
@@ -87,7 +87,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
               category={item.category}
               onsale={item.onsale}
               sold={item.sold}
-            />
+            /> 
           </Pane>
         );
       });
