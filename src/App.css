@@ -1,5 +1,6 @@
 .default-styles {
-  /* text-align: center; */
+  /* changes alignment for all navbar tabs */
+  text-align: center;
   color: var(--white-color);
   background-color: var(--dark-color);
 }

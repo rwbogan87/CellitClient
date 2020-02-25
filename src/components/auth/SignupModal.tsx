@@ -1,10 +1,10 @@
 import React, { Component, SyntheticEvent } from "react";
 import './SignupModal.css';
 import Popup from "reactjs-popup";
-import { FormField, TextInput } from 'evergreen-ui';
+import { Button, FormField, TextInput } from 'evergreen-ui';
 
 interface ISignupprops {
-    setToken: (token: string) => void;
+    setToken: (token: string)=>void;
 }
 
 interface ISignupstate {
@@ -35,7 +35,7 @@ class SignupModal extends Component<ISignupprops, ISignupstate> {
         }
     }
 
-    userCreate = (e: SyntheticEvent) => {
+    userCreate=(e: SyntheticEvent)=>{
         e.preventDefault();
         fetch('http://localhost:8000/user/signup', {
             method: "POST",
@@ -53,60 +53,61 @@ class SignupModal extends Component<ISignupprops, ISignupstate> {
             headers: new Headers({
             "Content-Type": "application/json"
         })
-    }).then(res => res.json())
-    .then(data => {
+    }).then(res=>res.json())
+    .then(data=>{
         console.log(data);
         this.props.setToken(data.sessionToken);
         localStorage.setItem('token', data.sessionToken)
-    }).catch(err => console.log("Error: invalid user creation", err))
+    }).catch(err=>console.log("Error: invalid user creation", err))
 }
 
     render() {
     return (
     <Popup trigger={<button> New User </button>} position="right center" className="popupmodal">
-        <FormField className = "signupform" label = "signupform" onSubmit={(e: any) => this.userCreate(e)}>
+        <FormField className="signupform" label="signupform" onSubmit={(e: any)=>this.userCreate(e)}>
                 <h3>Create Account</h3>
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "First Name" type = "text" 
-                // value = {this.state.firstname} feels needed but its not?
-                onchange = {(e: any)=>this.setState({ firstname: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="First Name" type="text" 
+                // value={this.state.firstname} feels needed but its not?
+                onChange={(e: any)=>this.setState({ firstname: e.target.value })}
             /><br /><br />
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Last Name" type = "text"
-                // value = {this.state.lastname}
-                onchange = {(e: any)=>this.setState({ lastname: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Last Name" type="text"
+                // value={this.state.lastname}
+                onChange={(e: any)=>this.setState({ lastname: e.target.value })}
             /><br /><br />
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Email Address" type = "email"
-                // value = {this.state.email}
-                onchange = {(e: any)=>this.setState({ email: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Email Address" type="email"
+                // value={this.state.email}
+                onChange={(e: any)=>this.setState({ email: e.target.value })}
             /><br /><br />
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Password" type = "password"
-                // value = {this.state.password}
-                onchange = {(e: any)=>this.setState({ password: e.target.value })}
-            /><br /><br />
-            
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Street" type = "text"
-                // value = {this.state.street}
-                onchange = {(e: any)=>this.setState({ street: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Password" type="password"
+                // value={this.state.password}
+                onChange={(e: any)=>this.setState({ password: e.target.value })}
             /><br /><br />
             
-            <TextInput width = "20em" className = "signupinputs" placeholder = "City" type = "text"
-                // value = {this.state.city}
-                onchange = {(e: any)=>this.setState({ city: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Street" type="text"
+                // value={this.state.street}
+                onChange={(e: any)=>this.setState({ street: e.target.value })}
+            /><br /><br />
+            
+            <TextInput width="20em" className="signupinputs" placeholder="City" type="text"
+                // value={this.state.city}
+                onChange={(e: any)=>this.setState({ city: e.target.value })}
             />
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Zip" type = "number"
-                // value = {this.state.zip}
-                onchange = {(e: any)=>this.setState({ zip: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Zip" type="number"
+                // value={this.state.zip}
+                onChange={(e: any)=>this.setState({ zip: e.target.value })}
             />
 
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Phone" type = "text"
-                // value = {this.state.phone}
-                onchange = {(e: any)=>this.setState({ phone: e.target.value })}
+            <TextInput width="20em" className="signupinputs" placeholder="Phone" type="text"
+                // value={this.state.phone}
+                onChange={(e: any)=>this.setState({ phone: e.target.value })}
             />  
             {/* admin stays false (requires manual entry by super user) */}
+            <Button onClick={(e: SyntheticEvent) => this.userCreate(e)} className="submitbutton" type="submit">Submit</Button>
 
         </FormField>
     </Popup>
