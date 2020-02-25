@@ -20,7 +20,7 @@ class Auth extends Component<IProps> {
             {/* Modal being used instead of signup */}
                {/* <Signup/> */}
                {/* token={token} */}
-               {/* <SignupModal token={this.props.token}/> */}
+               <SignupModal setToken={this.props.setToken}/>
                </div>
            </Pane>
         )

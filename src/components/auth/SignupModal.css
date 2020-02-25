@@ -1,7 +1,7 @@
 div.popup-content.popupmodal-content {
     width: 20em !important;
     position: fixed;
-    margin-left: -13em;
+    margin-left: 10vw;
     top: 50%;
     left: 50%;
     padding-bottom: 4em;

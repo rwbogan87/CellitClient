@@ -42,6 +42,7 @@ class Login extends Component<ILoginProps, ILoginState> {
             console.log(data);
             // pass the dang token through
             this.props.setToken(data.sessionToken);
+            localStorage.setItem('token', data.sessionToken);
         })
             .catch(err => console.log("Error: invalid signin attempt", err));
         };
