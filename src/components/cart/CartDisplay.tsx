@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import {Pane, Button, Text} from 'evergreen-ui'
+import React from 'react'
+import {Pane, Button} from 'evergreen-ui'
 
 interface Iprops{
     name: string
