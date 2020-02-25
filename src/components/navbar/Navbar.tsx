@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { Pane, Button, Heading } from 'evergreen-ui';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Store from '../../components/store/Store';
@@ -15,7 +15,7 @@ interface INavbarProps {
 }
 
 interface INavbarState {
-  sessionToken: string | null;
+  sessionToken: string;
 }
 
 export class Navbar extends Component<INavbarProps, INavbarState> {
@@ -26,8 +26,34 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
 
   setToken = (token: string) => {
     console.log(token);
-    this.setState({sessionToken: token});
+    this.setState({sessionToken: token})
+    ;
   }
+
+  viewconductor = () => {
+      if(this.state.sessionToken === '') {
+        return <Auth setToken={this.setToken}/>;
+      } else {
+        return (
+          <div>
+          <h1>User successfully logged in.</h1>
+          <h3>Click to log out</h3>
+          <button onClick={() => this.logouttoggle()}>Logout</button>
+          </div>
+        );
+      }
+    }
+
+    logouttoggle = () => {
+      if(this.state.sessionToken === '') {
+        return null;
+      } else {
+        localStorage.clear();
+        sessionStorage.clear();
+        this.setState({sessionToken: ""})
+      }
+    }
+  
 
     // in case token exists already in browser
   // componentDidMount() {
@@ -77,7 +103,7 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
                 <Store />
               </Route>
               <Route exact path='/account'>
-                <Auth setToken={this.setToken}/>
+                {this.viewconductor()}
               </Route>
               <Route exact path='/cart'>
                 <Cart />
