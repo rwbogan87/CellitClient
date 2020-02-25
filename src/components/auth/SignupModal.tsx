@@ -1,43 +1,113 @@
-import React, { Component } from "react";
+import React, { Component, SyntheticEvent } from "react";
 import './SignupModal.css';
 import Popup from "reactjs-popup";
 import { FormField, TextInput } from 'evergreen-ui';
 
-export class SignupModal extends Component {
+interface ISignupprops {
+    token: any;
+}
+
+interface ISignupstate {
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+    street: string;
+    city: string;
+    zip: number;
+    phone: string;
+    admin: boolean;
+}
+
+class SignupModal extends Component<ISignupprops, ISignupstate> {
+    constructor(props: any) {
+        super(props);
+        this.state={
+            firstname: "",
+            lastname: "",
+            email: "",
+            password: "",
+            street: "",
+            city: "",
+            zip: 0,
+            phone: "",
+            admin: false
+        }
+    }
+
+    userCreate = (e: SyntheticEvent) => {
+        e.preventDefault();
+        fetch('http://localhost:8000/user/signup', {
+            method: "POST",
+            body: JSON.stringify({
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
+                email: this.state.email,
+                password: this.state.password,
+                street: this.state.street,
+                city: this.state.city,
+                zip: this.state.zip,
+                phone: this.state.phone,
+                admin: false
+        }),
+            headers: new Headers({
+            "Content-Type": "application/json"
+        })
+    }).then(res => res.json())
+    .then(data => {
+        console.log(data);
+        this.props.token(data.sessionToken);
+    }).catch(err => console.log("Error: invalid user creation", err))
+}
+
     render() {
     return (
     <Popup trigger={<button> New User </button>} position="right center" className="popupmodal">
-        <FormField className = "signupform">
+        <FormField className = "signupform" label = "signupform" onSubmit={(e: any) => this.userCreate(e)}>
                 <h3>Create Account</h3>
-            <TextInput width = "20em" className = "signupinputs" placeholder = "First Name"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "First Name" type = "text" 
+                value = {this.state.firstname}
+                onchange = {(e: any)=>this.setState({ firstname: e.target.value })}
+            /><br /><br />
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Last Name" type = "text"
+                value = {this.state.lastname}
+                onchange = {(e: any)=>this.setState({ lastname: e.target.value })}
+            /><br /><br />
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Email Address" type = "email"
+                value = {this.state.email}
+                onchange = {(e: any)=>this.setState({ email: e.target.value })}
+            /><br /><br />
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Password" type = "password"
+                value = {this.state.password}
+                onchange = {(e: any)=>this.setState({ password: e.target.value })}
+            /><br /><br />
+            
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Street" type = "text"
+                value = {this.state.street}
+                onchange = {(e: any)=>this.setState({ street: e.target.value })}
+            /><br /><br />
+            
+            <TextInput width = "20em" className = "signupinputs" placeholder = "City" type = "text"
+                value = {this.state.city}
+                onchange = {(e: any)=>this.setState({ city: e.target.value })}
             />
-            <br /><br />
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Last Name"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Zip" type = "number"
+                value = {this.state.zip}
+                onchange = {(e: any)=>this.setState({ zip: e.target.value })}
             />
-            <br /><br />
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Email Address"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
-            />
-            <br /><br />
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Password"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
-            />
-            <br /><br />
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Shipping"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
-            />
-            <br /><br />
-            <TextInput width = "20em" className = "signupinputs" placeholder = "Shipping2"
-                // onchange={e=>this.setState({ value: e.target.value })}
-                // value={state.value}
-            />
+
+            <TextInput width = "20em" className = "signupinputs" placeholder = "Phone" type = "text"
+                value = {this.state.phone}
+                onchange = {(e: any)=>this.setState({ phone: e.target.value })}
+            />  
+
+            {/* admin stays false (requires manual entry by super user) */}
+
         </FormField>
     </Popup>
     )}
