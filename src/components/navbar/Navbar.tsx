@@ -12,32 +12,43 @@ interface INavbarProps {
   will: string;
   logit: (text: string) => void;
   test: string;
+  // trying to send name as props and display in navbar
+  setName?: (name: string) => void;
 }
 
 interface INavbarState {
   sessionToken: string;
+  sessionName?: string;
 }
 
 export class Navbar extends Component<INavbarProps, INavbarState> {
   
   state: INavbarState={
-    sessionToken: ""
+    sessionToken: "",
+    sessionName: ""
   };
 
   setToken = (token: string) => {
-    console.log(token);
-    this.setState({sessionToken: token})
-    ;
+    // console.log(token);
+    this.setState({sessionToken: token});
   }
 
+  setName = (name: string) => {
+    this.setState({sessionName: name});
+  }
+  
   viewconductor = () => {
-      if(this.state.sessionToken === '') {
-        return <Auth setToken={this.setToken}/>;
+      if(this.state.sessionToken===''&&localStorage.getItem('token')===null) {
+        return <Auth
+        setToken={this.setToken}
+        setName={this.setName}
+        />
       } else {
         return (
           <div>
-          <h1>User successfully logged in.</h1>
-          <h3>Click to log out</h3>
+          <br/><br/>
+          <h2>User successfully logged in.</h2>
+          <h4>Click to log out</h4>
           <button onClick={() => this.logouttoggle()}>Logout</button>
           </div>
         );
@@ -45,7 +56,7 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
     }
 
     logouttoggle = () => {
-      if(this.state.sessionToken === '') {
+      if(this.state.sessionToken === ''&&localStorage.getItem('token')===null) {
         return null;
       } else {
         localStorage.clear();
@@ -53,7 +64,6 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
         this.setState({sessionToken: ""})
       }
     }
-  
 
     // in case token exists already in browser
   // componentDidMount() {
@@ -68,12 +78,13 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
     return (
       <div className="default-styles
       ">
+      <h1>{localStorage.getItem('activename')}</h1>
         <Router>
-          <Pane className="default-styles" display='flex' padding={16}  borderRadius={3}>
-            <Pane flex={1} alignItems='center' display='flex'>
-              <Link className='link' to='/'>
-                <Heading size={600}color="#eeeeee">Cell/it!</Heading>
-              </Link>
+            <Pane className="default-styles" display='flex' padding={16}  borderRadius={3}>
+              <Pane flex={1} alignItems='center' display='flex'>
+                <Link className='link' to='/'>
+                  <Heading size={600}color="#eeeeee">Cell/it!</Heading>
+                </Link>
             </Pane>
             <Pane>
               {/* Below you can see the marginRight property on a Button. */}
