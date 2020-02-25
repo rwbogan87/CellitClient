@@ -2,20 +2,46 @@ import React, { Component } from 'react';
 import { Pane, Button, Heading } from 'evergreen-ui';
 import Items from './StoreItems';
 import { string } from 'prop-types';
+import { any } from 'glamor';
 
-interface IStoreProps {}
+interface IStoreProps {
+//   item: { id:0;
+//     name: string;
+//    description: string;
+//    price: number;
+//    quantity: number;
+//    weight: number;
+//    category: string;
+//    onsale: string;
+//    sold: number;
+//    poster: number;
+//  };
+
+}
 
 interface IStoreState {
   name: string;
-  description: string;
-  price: number;
-  quantity: number;
-  weight: number;
-  category: string;
-  onsale: string;
-  sold: number;
-  poster: number;
-  items: object;
+  // description: string;
+  // price: number;
+  // quantity: number;
+  // weight: number;
+  // category: string;
+  // onsale: string;
+  // sold: number;
+  // poster: number;
+//    item: { id:0;
+//     name: string;
+//    description: string;
+//    price: number;
+//    quantity: number;
+//    weight: number;
+//    category: string;
+//    onsale: string;
+//    sold: number;
+//    poster: number;
+//  };
+  // item: object;
+  items:object[];
 }
 
 export class Store extends Component<IStoreProps, IStoreState> {
@@ -23,15 +49,27 @@ export class Store extends Component<IStoreProps, IStoreState> {
     super(props);
     this.state = {
       name: 'Test',
-      description: 'test description',
-      price: 0,
-      quantity: 0,
-      weight: 0,
-      category: 'test',
-      onsale: 'NO!!!',
-      sold: 0,
-      poster: 0,
-      items: []
+      // description: 'test description',
+      // price: 0,
+      // quantity: 0,
+      // weight: 0,
+      // category: 'test',
+      // onsale: 'NO!!!',
+      // sold: 0,
+      // poster: 0,
+      items: [],
+      // item: {},
+      // item: { id: 0,
+      //    name: '',
+      //   description: '',
+      //   price: 0,
+      //   quantity: 0,
+      //   weight: 0,
+      //   category: '',
+      //   onsale: '',
+      //   sold: 0,
+      //   poster: 0,
+      // }
     };
   }
 
@@ -55,8 +93,20 @@ export class Store extends Component<IStoreProps, IStoreState> {
         // console.log(json);
         this.setState({ items: json });
         console.log(this.state.items);
+        this.mapper(json)
       });
   };
+
+mapper = (json: any)=>{
+  return this.state.items.map((item:any)=>{
+return(
+  <p>HI{json}</p>
+    // <Items name={this.state.item.name}/>
+)
+  })
+
+}
+
 
   render() {
     return (
@@ -74,24 +124,14 @@ export class Store extends Component<IStoreProps, IStoreState> {
           </Pane>
         </Pane>
         <Pane>
-          <Items
-            name={this.state.name}
-            description={this.state.description}
-            price={this.state.price}
-            quantity={this.state.quantity}
-            weight={this.state.weight}
-            category={this.state.category}
-            onsale={this.state.onsale}
-            sold={this.state.sold}
-            poster={this.state.poster}
-          />
-          {/* 
-          
-          {users.map(user => (
-          <UserItem key={user.id} user={user} />
-        ))}
-          
-          */}
+        
+         
+
+              <Pane>
+                {this.mapper}
+              </Pane>
+         
+        
         </Pane>
       </Pane>
     );
