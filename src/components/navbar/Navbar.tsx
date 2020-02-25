@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, SyntheticEvent } from 'react';
 import { Pane, Button, Heading } from 'evergreen-ui';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Store from '../../components/store/Store';
@@ -6,6 +6,7 @@ import Auth from '../../components/auth/Auth';
 import Cart from '../../components/cart/Cart';
 import About from '../about/About';
 import Admin from '../../components/admin/Admin';
+import { stringify } from 'querystring';
 
 interface INavbarProps {
   will: string;
@@ -13,7 +14,56 @@ interface INavbarProps {
   test: string;
 }
 
-export class Navbar extends Component<INavbarProps> {
+interface INavbarState {
+  sessionToken: string;
+}
+
+export class Navbar extends Component<INavbarProps, INavbarState> {
+  
+  state: INavbarState={
+    sessionToken: ""
+  };
+
+  setToken = (token: string) => {
+    console.log(token);
+    this.setState({sessionToken: token})
+    ;
+  }
+
+  viewconductor = () => {
+      if(this.state.sessionToken === '') {
+        return <Auth setToken={this.setToken}/>;
+      } else {
+        return (
+          <div>
+          <h1>User successfully logged in.</h1>
+          <h3>Click to log out</h3>
+          <button onClick={() => this.logouttoggle()}>Logout</button>
+          </div>
+        );
+      }
+    }
+
+    logouttoggle = () => {
+      if(this.state.sessionToken === '') {
+        return null;
+      } else {
+        localStorage.clear();
+        sessionStorage.clear();
+        this.setState({sessionToken: ""})
+      }
+    }
+  
+
+    // in case token exists already in browser
+  // componentDidMount() {
+  //   if (localStorage.getItem("token")){
+  //     console.log("token already exists");
+  //     const newToken=localStorage.getItem("token");
+  //     this.setState({sessionToken : newToken});
+  //   }
+  // }
+  
   render() {
     return (
       <div className="default-styles
@@ -53,7 +103,7 @@ export class Navbar extends Component<INavbarProps> {
                 <Store />
               </Route>
               <Route exact path='/account'>
-                <Auth />
+                {this.viewconductor()}
               </Route>
               <Route exact path='/cart'>
                 <Cart />
