@@ -72,24 +72,42 @@ export class Store extends Component<IStoreProps, IStoreState> {
   };
 
   mapper = (json: any) => {
-    return json.map((item: any) => {
-      console.log(item);
+    if (json !== undefined) {
+      return json.map((item: any) => {
+        console.log(item);
+        return (
+          <Pane key={item.id}>
+            <Items
+              id={item.id}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              quantity={item.quantity}
+              weight={item.weight}
+              category={item.category}
+              onsale={item.onsale}
+              sold={item.sold}
+            />
+          </Pane>
+        );
+      });
+    } else {
       return (
-        <Pane key={item.id}>
+        <Pane key={this.state.item.id}>
           <Items
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            price={item.price}
-            quantity={item.quantity}
-            weight={item.weight}
-            category={item.category}
-            onsale={item.onsale}
-            sold={item.sold}
+            id={this.state.item.id}
+            name={this.state.item.name}
+            description={this.state.item.description}
+            price={this.state.item.price}
+            quantity={this.state.item.quantity}
+            weight={this.state.item.weight}
+            category={this.state.item.category}
+            onsale={this.state.item.onsale}
+            sold={this.state.item.sold}
           />
         </Pane>
       );
-    });
+    }
   };
 
   render() {
