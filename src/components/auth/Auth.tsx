@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import { Pane } from 'evergreen-ui';
 import Login from '../auth/Login';
-// import Signup from '../auth/Signup';
 import SignupModal from '../auth/SignupModal';
-import {
-    BrowserRouter as Router,
-  } from 'react-router-dom';
 
 export class Auth extends Component {
     render() {
@@ -20,8 +16,8 @@ export class Auth extends Component {
             {/* Modal being used instead of signup */}
                {/* <Signup/> */}
                {/* token={token} */}
-               </div>
                <SignupModal/>
+               </div>
            </Pane>
         )
     }
