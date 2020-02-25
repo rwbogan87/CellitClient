@@ -3,87 +3,62 @@ import { Pane, Button, Heading } from 'evergreen-ui';
 import Items from './StoreItems';
 import { string } from 'prop-types';
 import { any } from 'glamor';
+import { isTSEnumMember, isTemplateElement } from '@babel/types';
 
-interface IStoreProps {
-//   item: { id:0;
-//     name: string;
-//    description: string;
-//    price: number;
-//    quantity: number;
-//    weight: number;
-//    category: string;
-//    onsale: string;
-//    sold: number;
-//    poster: number;
-//  };
-
-}
+interface IStoreProps {}
 
 interface IStoreState {
-  name: string;
-  // description: string;
-  // price: number;
-  // quantity: number;
-  // weight: number;
-  // category: string;
-  // onsale: string;
-  // sold: number;
-  // poster: number;
-//    item: { id:0;
-//     name: string;
-//    description: string;
-//    price: number;
-//    quantity: number;
-//    weight: number;
-//    category: string;
-//    onsale: string;
-//    sold: number;
-//    poster: number;
-//  };
-  // item: object;
-  items:object[];
+  token: any;
+  item: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    quantity: number;
+    weight: number;
+    category: string;
+    onsale: string;
+    sold: number;
+  };
+  items: object[];
 }
 
 export class Store extends Component<IStoreProps, IStoreState> {
   constructor(props: IStoreState) {
     super(props);
     this.state = {
-      name: 'Test',
-      // description: 'test description',
-      // price: 0,
-      // quantity: 0,
-      // weight: 0,
-      // category: 'test',
-      // onsale: 'NO!!!',
-      // sold: 0,
-      // poster: 0,
+      token: localStorage.getItem('token'),
       items: [],
-      // item: {},
-      // item: { id: 0,
-      //    name: '',
-      //   description: '',
-      //   price: 0,
-      //   quantity: 0,
-      //   weight: 0,
-      //   category: '',
-      //   onsale: '',
-      //   sold: 0,
-      //   poster: 0,
-      // }
+      item: {
+        id: 0,
+        name: '',
+        description: '',
+        price: 0,
+        quantity: 0,
+        weight: 1,
+        category: '',
+        onsale: '',
+        sold: 0
+      }
     };
   }
 
   componentDidMount = () => {
     this.getAllItems();
   };
-
+  componentWillMount = () => {};
+  // tokenMaster =() => {
+  //   if (localStorage.getItem('token')) {
+  //     this.setState({token: localStorage.getItem('token')});
+  //   }
+  // };
   getAllItems = () => {
     fetch(`http://localhost:8000/inventoryitem/inventory`, {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTgyNTc2NTU5LCJleHAiOjE1ODI2NjI5NTl9.XuCYTDafGUKt5mF7aMHdiKC7WVzaxLdsT5x0QA0mVvk'
+        authorization: this.state.token
+        // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTgyNTc2NTU5LCJleHAiOjE1ODI2NjI5NTl9.XuCYTDafGUKt5mF7aMHdiKC7WVzaxLdsT5x0QA0mVvk'
       })
     })
       .then(function(result) {
@@ -93,20 +68,29 @@ export class Store extends Component<IStoreProps, IStoreState> {
         // console.log(json);
         this.setState({ items: json });
         console.log(this.state.items);
-        this.mapper(json)
       });
   };
 
-mapper = (json: any)=>{
-  return this.state.items.map((item:any)=>{
-return(
-  <p>HI{json}</p>
-    // <Items name={this.state.item.name}/>
-)
-  })
-
-}
-
+  mapper = (json: any) => {
+    return json.map((item: any) => {
+      console.log(item);
+      return (
+        <Pane key={item.id}>
+          <Items
+            id={item.id}
+            name={item.name}
+            description={item.description}
+            price={item.price}
+            quantity={item.quantity}
+            weight={item.weight}
+            category={item.category}
+            onsale={item.onsale}
+            sold={item.sold}
+          />
+        </Pane>
+      );
+    });
+  };
 
   render() {
     return (
@@ -124,14 +108,7 @@ return(
           </Pane>
         </Pane>
         <Pane>
-        
-         
-
-              <Pane>
-                {this.mapper}
-              </Pane>
-         
-        
+          <Pane>{this.mapper(this.state.items)}</Pane>
         </Pane>
       </Pane>
     );
