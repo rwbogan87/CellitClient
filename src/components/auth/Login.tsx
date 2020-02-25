@@ -1,31 +1,69 @@
-import React, { useState } from 'react'
+import React, { Component, SyntheticEvent } from 'react'
 import './Login.css'
 import { Button, Pane, FormField, TextInput } from 'evergreen-ui';
 
-function Login(): JSX.Element {
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+// sets up token to be passed
+interface ILoginProps {
+    setToken: (token: string) => void;
+}
 
-    const handleSubmit = (e: any): void => {
-        e.preventDefault()
-        setEmail('')
-        setPassword('')
+// sets up state for login fields
+interface ILoginState {
+    email: string;
+    password: string;
+}
+
+
+class Login extends Component<ILoginProps, ILoginState> {
+    // allows props and state to be used
+    constructor(props: ILoginProps) {
+        super(props);
+        this.state = {
+            email: "",
+            password: ""
+        };
     }
 
+    // signin fetch
+    userLogin = (e: SyntheticEvent) => {
+        e.preventDefault();
+        fetch('http://localhost:8000/user/signin', {
+            method: 'POST',
+            headers: new Headers({
+                "Content-Type" : "application/json"
+            }),
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password
+            })
+        }).then(res => res.json())
+        .then(data => {
+            console.log(data);
+            // pass the dang token through
+            this.props.setToken(data.sessionToken);
+        })
+            .catch(err => console.log("Error: invalid signin attempt", err));
+        };
+    
+    render() {
     return (
+        // input Form
         <Pane>
-            <FormField className = "Loginform" border = "2px solid white">
+            <FormField className = "Loginform" label = "loginform" border = "2px solid white">
                 <h3>Welcome Back</h3>
-                    <TextInput width = "20em" className = "logininputs" placeholder = "Email" value={email} type = "email" onChange={(e: any)=>setEmail(e.target.value)} required/>
+                    {/* Email */}
+                    <TextInput width = "20em" className = "logininputs" placeholder = "Email" value={this.state.email} type = "email" onChange={(e: any)=>this.setState({email: e.target.value})}/>
                     <br /><br />
-                    <TextInput width = "20em" className = "logininputs" placeholder = "Password" value={password} type = "password" onChange={(e:any)=>setPassword(e.target.value)} required/>
+                    {/* Password */}
+                    <TextInput width = "20em" className = "logininputs" placeholder = "Password" value={this.state.password} type = "password" onChange={(e: any)=>this.setState({password: e.target.value})}/>
                     <br /><br />
-                <Button className="submitbutton" type="submit">Submit</Button>
+                <Button onClick={(e: SyntheticEvent) => this.userLogin(e)} className="submitbutton" type="submit">Submit</Button>
                 <br />
             </FormField>
         </Pane>
     )
+    }
 }
 
 

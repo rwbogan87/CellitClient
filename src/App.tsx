@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // let test:string = "testing";
 
 interface IAppProps {
+  token?: string;
   //    will?: string;
 }
 interface IAppState {
@@ -29,7 +30,6 @@ class App extends React.Component<IAppProps, IAppState> {
         <Pane className='App default-styles'>
           <Router />
           <Navbar
-          
             logit={this.logit}
             will={this.state.will}
             test={this.state.test}

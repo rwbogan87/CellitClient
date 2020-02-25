@@ -3,20 +3,24 @@ import { Pane } from 'evergreen-ui';
 import Login from '../auth/Login';
 import SignupModal from '../auth/SignupModal';
 
-export class Auth extends Component {
+interface IProps {
+    setToken: (token: string) => void;
+}
+
+class Auth extends Component<IProps> {
     render() {
         return (
            <Pane>
                <br/>
                <div className = "login">
-               <Login/>
+               <Login setToken={this.props.setToken}/>
                {/* token={token} */}
                </div>
                <div className = "signup">
             {/* Modal being used instead of signup */}
                {/* <Signup/> */}
                {/* token={token} */}
-               <SignupModal/>
+               {/* <SignupModal token={this.props.token}/> */}
                </div>
            </Pane>
         )
