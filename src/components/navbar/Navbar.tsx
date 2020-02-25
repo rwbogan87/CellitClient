@@ -106,7 +106,7 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
                 {this.viewconductor()}
               </Route>
               <Route exact path='/cart'>
-                <Cart />
+                <Cart token={this.setToken}/>
               </Route>
               <Route exact path='/admin'>
                 <Admin />
