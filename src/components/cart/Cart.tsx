@@ -37,10 +37,10 @@ export class Cart extends React.Component <ICartProps, ICartState> {
     }
 
     componentDidMount = () => {
-        // console.log(this.state.token);
-        // console.log(this.state.cartId);
+        console.log(this.state.token);
+        console.log(this.state.cartId);
 
-        this.state.token === null ? this.mapper(this.state.data) :
+        this.state.token === null ? this.mapper(this.state.data) : this.state.cartId === 0 ? this.mapper(this.state.data) :
 
             fetch(`http://localhost:8000/cart/`, {
                 method: 'GET',
