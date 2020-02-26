@@ -72,6 +72,8 @@ export class Store extends Component<IStoreProps, IStoreState> {
   };
 
   mapper = (json: any) => {
+
+
     console.log(json)
     if (json.length>0) {
       return json.map((item: any) => {
