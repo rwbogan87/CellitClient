@@ -19,14 +19,33 @@ interface INavbarProps {
 interface INavbarState {
   sessionToken: string;
   sessionName?: string;
+  admin: any;
 }
+
+
 
 export class Navbar extends Component<INavbarProps, INavbarState> {
   
   state: INavbarState={
     sessionToken: "",
-    sessionName: ""
+    sessionName: "",
+    admin: localStorage.getItem('admin'),
   };
+
+// refreshAdmin = () => this.setState(admin: !this.state.admin)
+
+AdminButton = ()=>{
+  if(this.state.admin=="true"){
+  return(
+    <Link className='link' to='/admin'>
+                <Button>Admin {this.state.admin}</Button>
+  </Link> );
+  // this.forceUpdate();
+}else{return null;
+}
+}
+
+
 
   setToken = (token: string) => {
     // console.log(token);
@@ -36,6 +55,7 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
   setName = (name: string) => {
     this.setState({sessionName: name});
   }
+
   
   viewconductor = () => {
       if(this.state.sessionToken===''&&localStorage.getItem('token')===null) {
@@ -60,8 +80,11 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
         return null;
       } else {
         localStorage.clear();
+        
         sessionStorage.clear();
-        this.setState({sessionToken: ""})
+        this.setState({sessionToken: ""});
+        this.forceUpdate();
+
       }
     }
 
@@ -96,9 +119,10 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
                 <Button appearance='primary'>Cart</Button>
               </Link>
 
-              <Link className='link' to='/admin'>
+              {this.state.admin==true?<Link className='link' to='/admin'>
                 <Button>Admin {this.props.test}</Button>
-              </Link>
+              </Link>:null }
+              {this.AdminButton()}
 
               <Link className='link' to='/about'>
                 <Button onClick={this.props.logit}>
@@ -119,9 +143,11 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
               <Route exact path='/cart'>
                 <Cart token={this.setToken}/>
               </Route>
+              {/* {this.state.admin!==true? null:} */}
               <Route exact path='/admin'>
                 <Admin />
-              </Route>
+              </Route> 
+              {/* <this.AdminButton/> */}
               <Route exact path='/about'>
                 <About will={this.props.will} />
               </Route>

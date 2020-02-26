@@ -6,6 +6,7 @@ import SignupModal from '../auth/SignupModal';
 interface IProps {
     setToken: (token: string) => void;
     setName: (name: string) => void;
+    // admin: any;
 }
 
 class Auth extends Component<IProps> {
@@ -16,8 +17,10 @@ class Auth extends Component<IProps> {
                <br/>
                <div className = "login">
                <Login 
+            //    admin={this.props.admin}
                setToken={this.props.setToken}
                setName={this.props.setName}
+               
                />
                {/* token={token} */}
                </div>
