@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Pane } from 'evergreen-ui';
 import CartDisplay from './CartDisplay';
+import Photo from '../../Assets/BuySometing.png';
 
 interface ICartProps{
     token: (token: string) => void
@@ -39,6 +40,8 @@ export class Cart extends React.Component <ICartProps, ICartState> {
         console.log(this.state.token);
         console.log(this.state.cartId);
 
+        this.state.token === null ? this.mapper(this.state.data) : this.state.cartId === 0 ? this.mapper(this.state.data) :
+
             fetch(`http://localhost:8000/cart/`, {
                 method: 'GET',
                 headers: new Headers ({
@@ -61,9 +64,9 @@ export class Cart extends React.Component <ICartProps, ICartState> {
     }
 
     mapper = (data: any) => {
-        return data ? data.map((item: any, index: number) => {
+        return data.length > 0 ? data.map((item: any, index: number) => {
             return <CartDisplay name={item.name} description={item.description} price={item.price} quantity={item.quantity} weight={item.weight} onsale={item.onsale} key={index}/>
-        }) : <img src='../../Assets/BuySomething.png'></img>
+        }) : <img src={Photo} style={{width: '100%', height: '100%'}}></img>
     }
 
     render() {
