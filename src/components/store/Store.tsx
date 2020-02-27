@@ -19,6 +19,7 @@ interface IStoreState {
     category: string;
     onsale: string;
     sold: number;
+    image: string;
   };
   items: object[];
 }
@@ -38,13 +39,15 @@ export class Store extends Component<IStoreProps, IStoreState> {
         weight: 1,
         category: '',
         onsale: '',
-        sold: 0
+        sold: 0,
+        image: ''
       }
     };
   }
 
   componentDidMount = () => {
     this.getAllItems();
+    console.log(this.state.item.image)
   };
   componentWillMount = () => {};
   // tokenMaster =() => {
@@ -90,6 +93,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
               category={item.category}
               onsale={item.onsale}
               sold={item.sold}
+              image={item.image}
             /> 
           </Pane>
         );
@@ -107,6 +111,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
             category={this.state.item.category}
             onsale={this.state.item.onsale}
             sold={this.state.item.sold}
+            image={this.state.item.image}
           />
         </Pane>
       );
@@ -117,8 +122,8 @@ export class Store extends Component<IStoreProps, IStoreState> {
     return (
       <Pane>
         <Pane className='App-header'>
-          <h1>Cell/it!</h1>
-          <p>*Anatomically Needed*</p>
+          <h1>Winkel</h1>
+          <p></p>
         </Pane>
         <Pane display='flex' padding={16} background='tint2' borderRadius={3}>
           <Pane flex={1} alignItems='center' display='flex'>

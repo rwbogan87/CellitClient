@@ -95,18 +95,19 @@ class SignupModal extends Component<ISignupprops, ISignupstate> {
             <TextInput width="20em" className="signupinputs" placeholder="City" type="text"
                 // value={this.state.city}
                 onChange={(e: any)=>this.setState({ city: e.target.value })}
-            />
+            /><br /><br />
 
             <TextInput width="20em" className="signupinputs" placeholder="Zip" type="number"
                 // value={this.state.zip}
                 onChange={(e: any)=>this.setState({ zip: e.target.value })}
-            />
+            /><br /><br />
 
             <TextInput width="20em" className="signupinputs" placeholder="Phone" type="text"
                 // value={this.state.phone}
                 onChange={(e: any)=>this.setState({ phone: e.target.value })}
             />  
             {/* admin stays false (requires manual entry by super user) */}
+            <br/><br/>
             <Button onClick={(e: SyntheticEvent) => this.userCreate(e)} className="submitbutton" type="submit">Submit</Button>
 
         </FormField>
