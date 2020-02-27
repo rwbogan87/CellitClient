@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Pane, Button, Text, Icon } from 'evergreen-ui';
 import StockImage from '../../Assets/cell-it1.jpg';
 
@@ -13,12 +13,83 @@ interface IStoreItemProps {
   onsale: string;
   sold: number;
   image: string;
+  token: any;
+  checker: boolean;
+  changeValue: () => void;
 }
 
 const StoreItems = (props: IStoreItemProps) => {
+  
   const mapItems = (arr: any) => {
     arr.map(() => {});
   };
+
+  const addToCart = (props: any) => {
+    
+    fetch(`http://localhost:8000/cart/`, {
+                method: 'GET',
+                headers: new Headers ({
+                    'Content-Type': 'application/json',
+                    'Authorization': props.token
+                })
+            }).then(
+                (res) => res.json()
+            ).then((data: any) => { console.log(data)
+            
+            data.error === "Not authorized" ? 
+            
+            props.changeValue()
+            
+            : data.length <= 0 ?
+
+                fetch(`http://localhost:8000/cart/create`, {
+                    method: 'POST',
+                    headers: new Headers ({
+                          'Content-Type': 'application/json',
+                          'Authorization': props.token
+                  })
+                }).then(
+                  res => res.json()
+                  ).then((data2: any)  =>
+                  fetch(`http://localhost:8000/cartitem/create`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      name: props.name,
+                      description: props.description,
+                      price: props.price,
+                      quantity: 1,
+                      weight: props.weight,
+                      onsale: props.onsale
+                    }),
+                    headers: new Headers ({
+                          'Content-Type': 'application/json',
+                          'Authorization': props.token
+                    })
+                  }). then(
+                    res => res.json()
+                  )
+                ) 
+          
+          :
+
+                fetch(`http://localhost:8000/cartitem/create`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                      name: props.name,
+                      description: props.description,
+                      price: props.price,
+                      quantity: 1,
+                      weight: props.weight,
+                      onsale: props.onsale
+                    }),
+                    headers: new Headers ({
+                          'Content-Type': 'application/json',
+                          'Authorization': props.token
+                    })
+                  }).then(res => res.json())
+          }
+    )}
+
   return (
     <div>
       <Pane key={props.id} className='item'>
@@ -41,7 +112,7 @@ const StoreItems = (props: IStoreItemProps) => {
             </Pane>
             <Pane>
               {/* <Pane textAlign="center">$ {props.price}</Pane> */}
-              <Button marginLeft={24}>
+              <Button marginLeft={24} onClick={() => {addToCart(props)}}>
                 <Icon icon='shopping-cart'></Icon>
               </Button>
             </Pane>
