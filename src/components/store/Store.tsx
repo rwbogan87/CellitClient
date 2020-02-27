@@ -4,6 +4,7 @@ import Items from './StoreItems';
 import { string } from 'prop-types';
 import { any } from 'glamor';
 import { isTSEnumMember, isTemplateElement } from '@babel/types';
+import { Redirect } from 'react-router-dom';
 
 interface IStoreProps {}
 
@@ -21,6 +22,7 @@ interface IStoreState {
     sold: number;
   };
   items: object[];
+  checker: boolean;
 }
 
 export class Store extends Component<IStoreProps, IStoreState> {
@@ -38,9 +40,14 @@ export class Store extends Component<IStoreProps, IStoreState> {
         weight: 1,
         category: '',
         onsale: '',
-        sold: 0
-      }
+        sold: 0,
+      },
+      checker: true
     };
+  }
+
+  changeValue = () => {
+    this.setState({checker: false})
   }
 
   componentDidMount = () => {
@@ -90,6 +97,9 @@ export class Store extends Component<IStoreProps, IStoreState> {
               category={item.category}
               onsale={item.onsale}
               sold={item.sold}
+              token={this.state.token}
+              checker={this.state.checker}
+              changeValue={this.changeValue}
             /> 
           </Pane>
         );
@@ -107,6 +117,9 @@ export class Store extends Component<IStoreProps, IStoreState> {
             category={this.state.item.category}
             onsale={this.state.item.onsale}
             sold={this.state.item.sold}
+            token={this.state.token}
+            checker={this.state.checker}
+            changeValue={this.changeValue}
           />
         </Pane>
       );
@@ -114,6 +127,9 @@ export class Store extends Component<IStoreProps, IStoreState> {
   };
 
   render() {
+    if (this.state.checker === false) {
+      return <Redirect to='/account' />
+    }
     return (
       <Pane>
         <Pane className='App-header'>
