@@ -75,7 +75,7 @@ export class InventoryDash extends Component<IProps, IState> {
         <Pane>
           <h3>Innventory</h3>
           <div>
-            <FormField className='' border='2px solid white'>
+            <FormField className=''label="" border='2px solid white'>
               <h3>Add an Item to the inventory</h3>
               <Pane className="input">
               <h6 className ='ml'>Item-name</h6>
