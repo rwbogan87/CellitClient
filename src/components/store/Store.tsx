@@ -4,6 +4,7 @@ import Items from './StoreItems';
 import { string } from 'prop-types';
 import { any } from 'glamor';
 import { isTSEnumMember, isTemplateElement } from '@babel/types';
+import { Redirect } from 'react-router-dom';
 
 interface IStoreProps {}
 
@@ -19,8 +20,10 @@ interface IStoreState {
     category: string;
     onsale: string;
     sold: number;
+    image: string;
   };
   items: object[];
+  checker: boolean;
 }
 
 export class Store extends Component<IStoreProps, IStoreState> {
@@ -38,13 +41,20 @@ export class Store extends Component<IStoreProps, IStoreState> {
         weight: 1,
         category: '',
         onsale: '',
-        sold: 0
-      }
+        sold: 0,
+        image: ''
+      },
+      checker: true
     };
+  }
+
+  changeValue = () => {
+    this.setState({checker: false})
   }
 
   componentDidMount = () => {
     this.getAllItems();
+    console.log(this.state.item.image)
   };
   componentWillMount = () => {};
   // tokenMaster =() => {
@@ -90,6 +100,10 @@ export class Store extends Component<IStoreProps, IStoreState> {
               category={item.category}
               onsale={item.onsale}
               sold={item.sold}
+              image={item.image}
+              token={this.state.token}
+              checker={this.state.checker}
+              changeValue={this.changeValue}
             /> 
           </Pane>
         );
@@ -107,6 +121,10 @@ export class Store extends Component<IStoreProps, IStoreState> {
             category={this.state.item.category}
             onsale={this.state.item.onsale}
             sold={this.state.item.sold}
+            image={this.state.item.image}
+            token={this.state.token}
+            checker={this.state.checker}
+            changeValue={this.changeValue}
           />
         </Pane>
       );
@@ -114,11 +132,14 @@ export class Store extends Component<IStoreProps, IStoreState> {
   };
 
   render() {
+    if (this.state.checker === false) {
+      return <Redirect to='/account' />
+    }
     return (
       <Pane>
         <Pane className='App-header'>
-          <h1>Cell/it!</h1>
-          <p>*Anatomically Needed*</p>
+          <h1>Winkel</h1>
+          <p></p>
         </Pane>
         <Pane display='flex' padding={16} background='tint2' borderRadius={3}>
           <Pane flex={1} alignItems='center' display='flex'>
