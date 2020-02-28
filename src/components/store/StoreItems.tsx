@@ -15,9 +15,9 @@ interface IStoreItemProps {
 }
 
 const StoreItems = (props: IStoreItemProps) => {
-  const mapItems = (arr: any) => {
-    arr.map(() => {});
-  };
+  // const mapItems = (arr: any) => {
+  //   arr.map(() => {});
+  // };
   return (
     <div>
       <Pane key={props.id} className='item'>

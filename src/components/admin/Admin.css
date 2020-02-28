@@ -15,3 +15,7 @@ display: inline-block;
     margin-right: 80px;
     width: 15em;
 }
+
+.order{
+    border: 2px solid white;
+}

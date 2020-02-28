@@ -1,15 +1,121 @@
 import React, { Component } from 'react'
 import { Pane, Button, Heading } from 'evergreen-ui';
 import './Admin.css'
-import Order from './OrderItem'
+// import Order from './OrderItem'
+import OrderItem from './OrderItem';
+
+interface IProps {
+
+}
+
+interface IState {
+    orders: object[];
+    token: any;
+    id: number;
+    street: string;
+    city: string;
+    zip: number;
+    phone: string;
+    firstname: string;
+    lastname: string;
+    userId: number;
+
+}
+
+export class OrdersDash extends Component<IProps,IState> {
+    constructor(props: IState){
+        super(props);
+
+        this.state = {
+            orders: [],
+            token: localStorage.getItem('token'),
+            id: 0,
+            street: '',
+            city: '',
+            zip: 0,
+            phone: '',
+            firstname: '',
+            lastname: '',
+            userId: 0,
+        }
+
+    }
+
+componentDidMount=()=>{
+    this.getAllOrders();
+}
 
 
-export class OrdersDash extends Component {
+getAllOrders =()=>{
+    fetch(`http://localhost:8000/order/orders`, {
+        method: 'GET',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          authorization: this.state.token
+          // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTgyNTc2NTU5LCJleHAiOjE1ODI2NjI5NTl9.XuCYTDafGUKt5mF7aMHdiKC7WVzaxLdsT5x0QA0mVvk'
+        })
+      })
+        .then(function(result) {
+          return result.json();
+        })
+        .then(json => {
+          // console.log(json);
+          this.setState({ orders: json });
+          console.log(this.state.orders);
+        });
+}
+
+
+mapper = (json: any) => {
+
+
+    console.log(json)
+    if (json.length>0) {
+      return json.map((order: any) => {
+        console.log(order);
+        return (
+          <Pane key={order.id}>
+            <OrderItem
+              id={order.id}
+              street={order.street}
+              city={order.city}
+              zip={order.zip}
+              phone={order.phone}
+              firstname={order.firstname}
+              lastname={order.lastname}
+              userId={order.userId}
+            /> 
+          </Pane>
+        );
+      });
+    } else {
+      return (
+        <Pane key={this.state.id}>
+          <OrderItem
+            id={this.state.id}
+            street={this.state.street}
+            city={this.state.city}
+            zip={this.state.zip}
+            phone={this.state.phone}
+            firstname={this.state.firstname}
+            lastname={this.state.lastname}
+            userId={this.state.userId}
+          />
+        </Pane>
+      );
+    }
+  };
+
+
+
     render() {
         return (
             <div  className="dash">
                 <Pane>
                     <h3>Orders</h3>
+                    <Pane>
+          <Pane>{this.mapper(this.state.orders)}</Pane>
+        </Pane>
                 </Pane>
                 
             </div>
