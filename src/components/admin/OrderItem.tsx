@@ -10,11 +10,12 @@ interface IProps{
     firstname: string;
     lastname: string;
     userId: number;
+    // update: ()=> any;
 }
 
 const OrderItem =(props: IProps)=> {
         return (
-            <div>
+            <div >
                <Pane textAlign="left" margin={20} className="order" >
                    <Pane>Order#: {props.id} </Pane> <Pane>Order User: {props.userId}</Pane><Pane> {props.lastname}, {props.firstname}</Pane>
                    <Pane>{props.street}</Pane> <Pane>{props.city}, {props.zip} </Pane>
@@ -22,6 +23,7 @@ const OrderItem =(props: IProps)=> {
                 
             </div>
         )
+        
 }
 
 export default OrderItem

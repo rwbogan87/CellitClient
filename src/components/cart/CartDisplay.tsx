@@ -11,15 +11,23 @@ interface Iprops{
 }
 
 const CartDisplay = (props: Iprops) => {
+
+
+const quantityUpdate = (value: any) => {
+ props.quantity = value
+}
+
+
+
+
     return(
         <div>
         <Pane>
             <h1>{props.name}</h1>
             <p>Description: {props.description}</p>
             <p>Price: {props.price}</p>
-            <p>Quantity: {props.quantity}</p>
+            <p>Quantity: <input value={props.quantity} type='number' onChange={e => quantityUpdate(e.target.value)} style={{width: '2em'}}/> </p>
             <Button>Delete</Button>
-            <Button>Change Quantity</Button>
         </Pane>
         </div>
     )
