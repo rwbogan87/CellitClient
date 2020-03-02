@@ -106,7 +106,7 @@ AdminButton = ()=>{
             <Pane className="default-styles" display='flex' padding={16}  borderRadius={3}>
               <Pane flex={1} alignItems='center' display='flex'>
                 <Link className='link' to='/'>
-                  <Heading size={600}color="#eeeeee">Cell/it!</Heading>
+                  <Heading size={600}>Winkel</Heading>
                 </Link>
             </Pane>
             <Pane>

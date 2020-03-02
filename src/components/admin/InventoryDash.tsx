@@ -2,13 +2,14 @@ import React, { Component, SyntheticEvent } from 'react';
 import { Pane, Button, Heading, TextInput, FormField } from 'evergreen-ui';
 import './Admin.css';
 import { number } from 'prop-types';
+import { fileURLToPath } from 'url';
 
-interface IProps {}
+interface IProps { }
 
 interface IState {
-    id: number;
-    updatedAt: any;
-    createdAt: any;
+  id: number;
+  updatedAt: any;
+  createdAt: any;
   token: any;
   name: string;
   description: string;
@@ -18,6 +19,7 @@ interface IState {
   catagory: string;
   onsale: string;
   sold: number;
+  image: string;
 }
 
 export class InventoryDash extends Component<IProps, IState> {
@@ -35,151 +37,226 @@ export class InventoryDash extends Component<IProps, IState> {
       weight: 1,
       catagory: '',
       onsale: '',
-      sold: 0
+      sold: 0,
+      image: ''
     };
   }
 
   inventoryUpdate = (e: SyntheticEvent) => {
+
+    const formData = new FormData();
+    formData.append("image", this.state.image);
+
+    let objArr: any[] = [];
+    objArr.push({
+      name: this.state.name,
+      description: this.state.description,
+      price: this.state.price,
+      quantity: this.state.quantity,
+      weight: this.state.weight,
+      catagory: this.state.catagory,
+      onsale: this.state.onsale,
+      sold: this.state.sold
+    })
+    console.log('objArr post push', objArr);
+    formData.append('objArr', JSON.stringify(objArr));
+    console.log('formData', formData)
+
     e.preventDefault();
-    console.log(this.state.name)
     fetch('http://localhost:8000/inventoryitem/create', {
       method: 'POST',
-      body: JSON.stringify({
-        name: this.state.name,
-        description: this.state.description,
-        price: this.state.price,
-        quantity: this.state.quantity,
-        weight: this.state.weight,
-        catagory: this.state.catagory,
-        onsale: this.state.onsale,
-        sold: 0
-      }),
+      body: formData
+      // body: 
+      //     JSON.stringify({
+      //     name: this.state.name,
+      //     description: this.state.description,
+      //     price: this.state.price,
+      //     quantity: this.state.quantity,
+      //     weight: this.state.weight,
+      //     catagory: this.state.catagory,
+      //     onsale: this.state.onsale,
+      //     sold: this.state.sold,
+      //     image: this.state.image
+      //   })
+
+      ,
       headers: new Headers({
-        'Content-Type': 'application/json',
-        authorization: this.state.token
+        // "Content-Type": 'form-data',
+        "Authorization": this.state.token
       })
     })
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        console.log( data.postedinfo.id)
-        // this.props.setToken(data.sessionToken);
-        // localStorage.setItem('token', data.sessionToken)
+        console.log("NAME", this.state.name)
+        console.log("IMAGE", this.state.image)
       })
       .catch(err => console.log('Error: invalid item creation', err));
   };
 
+  extractFilename = (path: any): any => {
+    if (path.substr(0, 12) == "C:\\fakepath\\")
+      return path.substr(12); // modern browser
+    var x;
+    x = path.lastIndexOf('/');
+    if (x >= 0) // Unix-based path
+      return path.substr(x + 1);
+    x = path.lastIndexOf('\\');
+    if (x >= 0) // Windows-based path
+      return path.substr(x + 1);
+    return path; // just the file name
+  }
+
+  updateFilename = (path: any): any => {
+    let name = this.extractFilename(path);
+    console.log(typeof name)
+    this.setState({ image: name })
+    // document.getElementById('filename').textContent = name;
+  }
+
+
   render() {
     return (
       <div className='dash'>
-        <Pane>
-          <h3>Innventory</h3>
+        <Pane className='inventorypane'>
+          <h3>Inventory</h3>
           <div>
-            <FormField className='' border='2px solid white'>
+            <FormField
+              label='inventoryform'
+              encType='multipart/form-data'
+              className='inventoryform'
+              border='2px solid white'>
+
               <h3>Add an Item to the inventory</h3>
               <Pane className="input">
-              <h6 className ='ml'>Item-name</h6>
-              <TextInput
-                className='mr'
-                placeholder='name'
-                value={this.state.name}
-                type='string'
-                onChange={(e: any) => this.setState({ name: e.target.value })}
-              />
+                <h6 className='ml'>Item-name</h6>
+                <TextInput
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='name'
+                  value={this.state.name}
+                  name="name"
+                  type='string'
+                  onChange={(e: any) => this.setState({ name: e.target.value })}
+                />
               </Pane>
               <Pane className="input">
-              <h6 className="ml">Descripion</h6>
+                <h6 className="ml">Descripion</h6>
 
-              <TextInput
-              className= "mr"
-                placeholder='description'
-                value={this.state.description}
-                type='string'
-                onChange={(e: any) =>
-                  this.setState({ description: e.target.value })
-                }
-              />
+                <TextInput
+                  className="mr"
+                  placeholder='description'
+                  // encType='multipart/form-data'
+                  value={this.state.description}
+                  type='string'
+                  onChange={(e: any) =>
+                    this.setState({ description: e.target.value })
+                  }
+                />
               </Pane>
-            
+
               <Pane className="input">
 
-              <h6 className='ml'>Price</h6>
+                <h6 className='ml'>Price</h6>
 
-              <TextInput 
-                className='mr'
-                placeholder='price'
-                value={this.state.price}
-                type='number'
-                onChange={(e: any) => this.setState({ price: e.target.value })}
-              />
+                <TextInput
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='price'
+                  value={this.state.price}
+                  type='number'
+                  onChange={(e: any) => this.setState({ price: e.target.value })}
+                />
               </Pane>
               <Pane className="input">
-             
-              <h6 className='ml'>Quantity</h6>
 
-              <TextInput
-                className='mr'
-                placeholder='quantitiy'
-                value={this.state.quantity}
-                type='number'
-                onChange={(e: any) =>
-                  this.setState({ quantity: e.target.value })
-                }
-              />
+                <h6 className='ml'>Quantity</h6>
+
+                <TextInput
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='quantitiy'
+                  value={this.state.quantity}
+                  type='number'
+                  onChange={(e: any) =>
+                    this.setState({ quantity: e.target.value })
+                  }
+                />
               </Pane>
               <Pane className="input">
-              
-              <h6 className= 'ml'>Weight</h6>
 
-              <TextInput
-                className='mr'
-                placeholder='weight'
-                value={this.state.weight}
-                type='number'
-                onChange={(e: any) => this.setState({ weight: e.target.value })}
-              />
+                <h6 className='ml'>Weight</h6>
+
+                <TextInput
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='weight'
+                  value={this.state.weight}
+                  type='number'
+                  onChange={(e: any) => this.setState({ weight: e.target.value })}
+                />
               </Pane>
               <Pane className="input">
-              
-              <h6 className='ml'>Category</h6>
 
-              <TextInput
-                className='mr'
-                placeholder='catagory'
-                value={this.state.catagory}
-                type='string'
-                onChange={(e: any) =>
-                  this.setState({ catagory: e.target.value })
-                }
-              />
+                <h6 className='ml'>Category</h6>
+
+                <TextInput
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='catagory'
+                  value={this.state.catagory}
+                  type='string'
+                  onChange={(e: any) =>
+                    this.setState({ catagory: e.target.value })
+                  }
+                />
               </Pane>
-              
+
               <Pane className="input">
-              <h6 className='ml'>Onsale</h6>
+                <h6 className='ml'>Onsale</h6>
 
-              <TextInput
-                // width='20em'
-                className='mr'
-                placeholder='onsale'
-                value={this.state.onsale}
-                type='string'
-                onChange={(e: any) => this.setState({ onsale: e.target.value })}
-              />
+                <TextInput
+                  // width='20em'
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='onsale'
+                  value={this.state.onsale}
+                  type='string'
+                  onChange={(e: any) => this.setState({ onsale: e.target.value })}
+                />
               </Pane>
               <Pane className="input">
-              
-              <h6 className='ml'># Sold</h6>
 
-              <TextInput
-                // width='20em'
-                className='mr'
-                placeholder='sold'
-                value={this.state.sold}
-                type='number'
-                onChange={(e: any) => this.setState({ sold: e.target.value })}
-              />
+                <h6 className='ml'># Sold</h6>
+
+                <TextInput
+                  // width='20em'
+                  className='mr'
+                  // encType='multipart/form-data'
+                  placeholder='sold'
+                  value={this.state.sold}
+                  type='number'
+                  onChange={(e: any) => this.setState({ sold: e.target.value })}
+                />
               </Pane>
-              
+              <Pane className="input">
+
+                <h6 className='ml'>Image</h6>
+
+                <TextInput
+                  // width='20em'
+                  className='mr'
+                  placeholder='image'
+                  // encType='multipart/form-data'
+                  type='file'
+                  onChange={
+                    (e: any) => { this.updateFilename(e.target.value) }
+                    // console.log(e.target.value)
+                    //  (e: any) => this.setState({ image: e.target.file })
+                  }
+                />
+              </Pane>
+
               <Button
                 onClick={(e: SyntheticEvent) => this.inventoryUpdate(e)}
                 className='submitbutton'
