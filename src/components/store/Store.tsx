@@ -54,7 +54,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
 
   componentDidMount = () => {
     this.getAllItems();
-    console.log(this.state.item.image)
+    // console.log(this.state.item.image)
   };
   componentWillMount = () => {};
   // tokenMaster =() => {
@@ -75,7 +75,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
         return result.json();
       })
       .then(json => {
-        // console.log(json);
+        console.log(json);
         this.setState({ items: json });
         console.log(this.state.items);
       });
@@ -121,7 +121,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
             category={this.state.item.category}
             onsale={this.state.item.onsale}
             sold={this.state.item.sold}
-            image={this.state.item.image}
+            image={this.state.item.image} 
             token={this.state.token}
             checker={this.state.checker}
             changeValue={this.changeValue}

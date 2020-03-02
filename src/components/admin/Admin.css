@@ -19,3 +19,7 @@ display: inline-block;
 .inventorypane {
     margin-bottom: 3em;
 }
+
+.order{
+    border: 2px solid #252525;;
+}
