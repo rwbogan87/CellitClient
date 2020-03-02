@@ -1,20 +1,85 @@
-import React, { Component } from 'react'
-import { Pane, Button, Heading } from 'evergreen-ui';
-import './Admin.css'
-import User from './User'
+import React, { Component, SyntheticEvent } from 'react';
+import { Pane, Button, Heading, TextInput, FormField } from 'evergreen-ui';
+import './Admin.css';
+import User from './User';
 
+interface IProps {}
 
-export class UsersDash extends Component {
-    render() {
-        return (
-            <div  className="dash">
-                <Pane>
-                    <h3>Users</h3>
-                </Pane>
-                
-            </div>
-        )
-    }
+interface IState {
+  token: any;
+  userID: any;
+  user: object[];
 }
 
-export default UsersDash
+export class UsersDash extends Component<IProps, IState> {
+  constructor(props: IState) {
+    super(props);
+    this.state = {
+      token: localStorage.getItem('token'),
+      userID: '',
+      user: [],
+
+    };
+  }
+
+  // componentDidMount = ()=>{
+  //     this.getAllUsers();
+  // }
+  getUser = (e: SyntheticEvent) => {
+    fetch(`http://localhost:8000/user/${this.state.userID}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        authorization: this.state.token
+        // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTgyNTc2NTU5LCJleHAiOjE1ODI2NjI5NTl9.XuCYTDafGUKt5mF7aMHdiKC7WVzaxLdsT5x0QA0mVvk'
+      })
+    })
+      .then(function(result) {
+        return result.json();
+      })
+      .then(json => {
+        console.log(json);
+        this.setState({ user: json[0] });
+        console.log(this.state.user);
+        // console.log(this.state.user[0])
+      });
+  };
+
+  render() {
+    return (
+      <div className='dash'>
+        <Pane>
+          <h3>Find a Specific User</h3>
+          <FormField label=''>
+            <TextInput
+              className=''
+              placeholder='0'
+              value={this.state.userID}
+              type='number'
+              onChange={(e: any) => this.setState({ userID: e.target.value })}
+            />
+            <Button
+              onClick={(e: SyntheticEvent) =>{
+                 this.getUser(e)
+              }
+                }
+              className='submitbutton'
+              type='submit'
+            >
+              Submit
+            </Button>
+          </FormField>
+          <Pane>
+              <User
+                user = {this.state.user}
+              />
+            {/* <User user={this.state.user} }/> */}
+            {/* {this.state.user} */}
+          </Pane>
+        </Pane>
+      </div>
+    );
+  }
+}
+
+export default UsersDash;
