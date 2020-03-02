@@ -18,6 +18,7 @@ interface IState {
   catagory: string;
   onsale: string;
   sold: number;
+  image: string;
   //url state changes
   endpoint: string;
   method: string;
@@ -45,13 +46,30 @@ export class InventoryDash extends Component<IProps, IState> {
       weight: 1,
       catagory: '',
       onsale: '',
-      sold: 0
+      sold: 0,
+      image: ''
     };
   }
 
   inventoryUpdate = (e: SyntheticEvent) => {
     e.preventDefault();
 
+    let upload: any = document.getElementById("upload")
+    const formData = new FormData();
+    formData.append("image", upload.files[0]);
+
+    let Photo: any[] = [];
+    Photo.push({
+      name: this.state.name,
+      description: this.state.description,
+      price: this.state.price,
+      quantity: this.state.quantity,
+      weight: this.state.weight,
+      catagory: this.state.catagory,
+      onsale: this.state.onsale,
+      sold: 0
+    })
+    formData.append('Photo', JSON.stringify({Photo}));
     console.log('item id: ', this.state.urlID);
     console.log(this.state.urlID != '');
     console.log('method: ', this.state.method);
@@ -63,18 +81,9 @@ export class InventoryDash extends Component<IProps, IState> {
       
       {
         method: `${this.state.method}`,
-        body: JSON.stringify({
-          name: this.state.name,
-          description: this.state.description,
-          price: this.state.price,
-          quantity: this.state.quantity,
-          weight: this.state.weight,
-          catagory: this.state.catagory,
-          onsale: this.state.onsale,
-          sold: 0
-        }),
+        body: formData,
         headers: new Headers({
-          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/json',
           authorization: this.state.token
         })
       }
@@ -99,7 +108,7 @@ export class InventoryDash extends Component<IProps, IState> {
         <Pane>
           <h3>Innventory</h3>
           <div>
-            <FormField className='' label='' border='2px solid white'>
+            <FormField className='inventoryform' label='inventoryform' border='2px solid white'>
               <h3>Add/Update an Item to/in the inventory</h3>
               <Pane className='input'>
                 <h6 className='ml'>Item-name</h6>
@@ -203,6 +212,11 @@ export class InventoryDash extends Component<IProps, IState> {
                   type='string'
                   onChange={(e: any) => this.setState({ sold: e.target.value })}
                 />
+              </Pane>
+
+              <Pane className='input'>
+                <h6 className='ml'># Image</h6>
+                <input className='mr' placeholder='image' type='file' id='upload'/>
               </Pane>
 
               <Pane className='input'>

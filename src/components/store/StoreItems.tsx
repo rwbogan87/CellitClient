@@ -12,7 +12,7 @@ interface IStoreItemProps {
   category: string;
   onsale: string;
   sold: number;
-  // image: string;
+  image: string;
   token: any;
   checker: boolean;
   changeValue: () => void;
@@ -97,8 +97,8 @@ const StoreItems = (props: IStoreItemProps) => {
         <Pane>
           <Pane justifyContent='space-between' display='flex' padding={24}>
             <Pane fontSize='16px'>
-              {/* <img src={(`http://localhost:8000/${props.image}`)}
-               height='200em' alt='image' /> */}
+              <img src={(`http://localhost:8000/${props.image}`)}
+               height='200em' alt='image' />
               <h2>{props.name}</h2>
               <h3 color='#eeeeee'>
                 {props.description} ${props.price}

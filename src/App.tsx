@@ -35,8 +35,8 @@ class App extends React.Component<IAppProps, IAppState> {
             test={this.state.test}
           />
           <Router />
-          <Footer />
         </Pane>
+          <Footer />
       </>
     );
   }
