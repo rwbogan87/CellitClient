@@ -98,6 +98,10 @@ const StoreItems = (props: IStoreItemProps) => {
         <Pane>
           <Pane justifyContent='space-between' lable= '' display='flex' padding={24}>
             <Pane fontSize='16px'>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0798a35c73de210850c82030605d52d6dbf411a1
               <img src={(`http://localhost:8000/${props.image}`)}
                height='200em' alt='image' />
               <h2>{props.name}</h2>
