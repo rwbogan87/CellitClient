@@ -128,10 +128,10 @@ AdminButton = ()=>{
               Test Button Below: Will delete before push
               
               */}
-
+{/* 
                 <Link className='link' to='/admin'>
                   <Button>Admin {this.props.test}</Button>
-                </Link>
+                </Link> */}
 
 
 

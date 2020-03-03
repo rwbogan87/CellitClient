@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 import './Footer.css'
+import Popup from "reactjs-popup";
+import { Button } from 'evergreen-ui';
 
-export class Footer extends Component {
+class Footer extends Component {
   render() {
-    return <div className='footer'>Your footer!!!</div>;
+    return (
+      <div className="footer">
+        <h2 className="footertext">Send us an email</h2>
+        <Popup trigger={<button> Contact Form </button>} position="right center" className="popupmodal">
+          <form method="POST" className="footerform" action="http://formspree.io/rwbogan87@gmail.com">
+                <input type="email" className="email" placeholder="Your email here"></input>
+                <textarea className="message" placeholder="Your message here"></textarea>
+                  <button type="submit">Send</button>
+          </form>
+        </Popup>
+      </div>
+    )
   }
 }
 
 export default Footer;
 
-// backup code, don't delete
+/* Backup code for multer Posting, DO NOT DELETE UNTIL DEPLOYMENT*/
 // import React, { Component, SyntheticEvent } from 'react';
 // import { Pane, Button, Heading, TextInput, FormField } from 'evergreen-ui';
 // import './Admin.css';
