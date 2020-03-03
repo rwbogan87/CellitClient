@@ -9,6 +9,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // let test:string = "testing";
 
 interface IAppProps {
+  token?: string;
   //    will?: string;
 }
 interface IAppState {
@@ -34,8 +35,8 @@ class App extends React.Component<IAppProps, IAppState> {
             test={this.state.test}
           />
           <Router />
-          <Footer />
         </Pane>
+          <Footer />
       </>
     );
   }

@@ -1,21 +1,34 @@
 import React, { Component } from 'react'
 import { Pane } from 'evergreen-ui';
 import Login from '../auth/Login';
-import Signup from '../auth/Signup';
-import {
-    BrowserRouter as Router,
-  } from 'react-router-dom';
+import SignupModal from '../auth/SignupModal';
 
-export class Auth extends Component {
+interface IProps {
+    setToken: (token: string) => void;
+    setName: (name: string) => void;
+    // admin: any;
+}
+
+class Auth extends Component<IProps> {
+
     render() {
         return (
            <Pane>
-               *Auth Component*
+               <br/>
                <div className = "login">
-               <Login/>
+               <Login 
+            //    admin={this.props.admin}
+               setToken={this.props.setToken}
+               setName={this.props.setName}
+               
+               />
+               {/* token={token} */}
                </div>
                <div className = "signup">
-               <Signup/>
+            {/* Modal being used instead of signup */}
+               {/* <Signup/> */}
+               {/* token={token} */}
+               <SignupModal setToken={this.props.setToken}/>
                </div>
            </Pane>
         )

@@ -1,0 +1,25 @@
+.dash{
+    min-height: 25vh;
+}
+.input{
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.ml{
+margin-left: 80px;
+display: inline-block;
+}
+.mr{
+    margin-right: 80px;
+    width: 15em;
+}
+
+.inventorypane {
+    margin-bottom: 3em;
+}
+
+.order{
+    border: 2px solid #252525;;
+}

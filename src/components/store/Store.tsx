@@ -1,69 +1,156 @@
 import React, { Component } from 'react';
 import { Pane, Button, Heading } from 'evergreen-ui';
-import Items from "./StoreItems";
+import Items from './StoreItems';
 import { string } from 'prop-types';
+import { any } from 'glamor';
+import { isTSEnumMember, isTemplateElement } from '@babel/types';
+import { Redirect } from 'react-router-dom';
 
-interface IStoreProps{
+interface IStoreProps {}
 
+interface IStoreState {
+  token: any;
+  item: {
+    id: number;
+    name: string;
+    description: string;
+    price: number;
+    quantity: number;
+    weight: number;
+    category: string;
+    onsale: string;
+    sold: number;
+    image: string;
+  };
+  items: object[];
+  checker: boolean;
 }
-
-interface IStoreState{
-  name: string;
-  description: string;
-  price: number;
-  quantity: number;
-  weight: number;
-  catagory: string;
-  onsale: string;
-  sold: number;
-  poster: number;
-}
-
 
 export class Store extends Component<IStoreProps, IStoreState> {
-
-  state = {
-    name: 'Test',
-    description: 'test description',
-    price: 0,
-    quantity: 0,
-    weight: 0,
-    catagory: 'test',
-    onsale: 'NO!!!',
-    sold: 0,
-    poster: 0,
+  constructor(props: IStoreState) {
+    super(props);
+    this.state = {
+      token: localStorage.getItem('token'),
+      items: [],
+      item: {
+        id: 0,
+        name: '',
+        description: '',
+        price: 0,
+        quantity: 0,
+        weight: 1,
+        category: '',
+        onsale: '',
+        sold: 0,
+        image: ''
+      },
+      checker: true
+    };
   }
 
+  changeValue = () => {
+    this.setState({checker: false})
+  }
 
-mapItems=()=>{
+  componentDidMount = () => {
+    this.getAllItems();
+    // console.log(this.state.item.image)
+  };
+  componentWillMount = () => {};
+  // tokenMaster =() => {
+  //   if (localStorage.getItem('token')) {
+  //     this.setState({token: localStorage.getItem('token')});
+  //   }
+  // };
+  getAllItems = () => {
+    fetch(`http://localhost:8000/inventoryitem/inventory`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        authorization: this.state.token
+        // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTgyNTc2NTU5LCJleHAiOjE1ODI2NjI5NTl9.XuCYTDafGUKt5mF7aMHdiKC7WVzaxLdsT5x0QA0mVvk'
+      })
+    })
+      .then(function(result) {
+        return result.json();
+      })
+      .then(json => {
+        console.log(json);
+        this.setState({ items: json });
+        console.log(this.state.items);
+      });
+  };
 
-}
+  mapper = (json: any) => {
+
+
+    console.log(json)
+    if (json.length>0) {
+      return json.map((item: any) => {
+        console.log(item);
+        return (
+          <Pane key={item.id}>
+            <Items
+              id={item.id}
+              name={item.name}
+              description={item.description}
+              price={item.price}
+              quantity={item.quantity}
+              weight={item.weight}
+              category={item.category}
+              onsale={item.onsale}
+              sold={item.sold}
+              image={item.image}
+              token={this.state.token}
+              checker={this.state.checker}
+              changeValue={this.changeValue}
+            /> 
+          </Pane>
+        );
+      });
+    } else {
+      return (
+        <Pane key={this.state.item.id}>
+          <Items
+            id={this.state.item.id}
+            name={this.state.item.name}
+            description={this.state.item.description}
+            price={this.state.item.price}
+            quantity={this.state.item.quantity}
+            weight={this.state.item.weight}
+            category={this.state.item.category}
+            onsale={this.state.item.onsale}
+            sold={this.state.item.sold}
+            image={this.state.item.image} 
+            token={this.state.token}
+            checker={this.state.checker}
+            changeValue={this.changeValue}
+          />
+        </Pane>
+      );
+    }
+  };
 
   render() {
+    if (this.state.checker === false) {
+      return <Redirect to='/account' />
+    }
     return (
       <Pane>
         <Pane className='App-header'>
-          <h1>Cell/it!</h1>
-          <p>*Anatomically Needed*</p>
+          <h1>Winkel</h1>
+          <p></p>
         </Pane>
         <Pane display='flex' padding={16} background='tint2' borderRadius={3}>
           <Pane flex={1} alignItems='center' display='flex'>
             <Heading size={600}>Our Items For Sale</Heading>
           </Pane>
           <Pane>
-            {/* Below you can see the marginRight property on a Button. */}
-            {/* <Button marginRight={16}>Button</Button> */}
-            <Button >Search</Button>
+            <Button>Search</Button>
           </Pane>
         </Pane>
         <Pane>
-          {/* <Pane background='tint1' padding={24} marginBottom={16}>
-            <Text>tint1</Text>
-          </Pane>
-          <Pane background='tint2' padding={24}>
-            <Text>tint2</Text>
-          </Pane> */}
-          <Items/>
+          <Pane>{this.mapper(this.state.items)}</Pane>
         </Pane>
       </Pane>
     );

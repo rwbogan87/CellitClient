@@ -1,0 +1,21 @@
+div.popup-content.popupmodal-content {
+    width: 20em !important;
+    position: fixed;
+    margin-left: 10vw;
+    top: 50%;
+    left: 50%;
+    padding-bottom: 4em;
+    background-color: rgb(40,44,52) !important;
+    color: white;
+}
+
+.signupform {
+    padding-bottom: 2em;
+}
+
+.signupinputs {
+    background-color: white;
+    color: black;
+}
+
+
