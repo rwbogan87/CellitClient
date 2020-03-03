@@ -55,7 +55,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     method: 'POST',
                     body: JSON.stringify({
                       name: props.name,
-                      description: props.description,
+                      category: props.category,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,
@@ -77,6 +77,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     body: JSON.stringify({
                       name: props.name,
                       description: props.description,
+                      category: props.category,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,
@@ -105,8 +106,8 @@ const StoreItems = (props: IStoreItemProps) => {
               </h3>
               <h4>Product information</h4>
 
-              <Pane> Katigoree: {props.category}</Pane>
-              <Pane> Item Weight: {props.weight}</Pane>
+              <Pane>Category: {props.category}</Pane>
+              <Pane>Weight: {props.weight}</Pane>
               <Pane>Quantity Available: {props.quantity}</Pane>
               <Pane>Number Sold: {props.sold}</Pane>
               <Pane>On Sale: {props.onsale}</Pane>
