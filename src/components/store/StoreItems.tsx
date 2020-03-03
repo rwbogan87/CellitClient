@@ -55,7 +55,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     method: 'POST',
                     body: JSON.stringify({
                       name: props.name,
-                      description: props.description,
+                      category: props.category,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,
@@ -77,6 +77,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     body: JSON.stringify({
                       name: props.name,
                       description: props.description,
+                      category: props.category,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,
