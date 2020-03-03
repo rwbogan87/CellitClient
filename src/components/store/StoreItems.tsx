@@ -96,8 +96,12 @@ const StoreItems = (props: IStoreItemProps) => {
       <Pane key={props.id} className='item'>
         {/* <Pane className="default-styles" padding={24} marginBottom={16}><Text color="#eeeeee">{props.name}</Text></Pane> */}
         <Pane>
-          <Pane justifyContent='space-between' display='flex' padding={24}>
+          <Pane justifyContent='space-between' lable= '' display='flex' padding={24}>
             <Pane fontSize='16px'>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0798a35c73de210850c82030605d52d6dbf411a1
               <img src={(`http://localhost:8000/${props.image}`)}
                height='200em' alt='image' />
               <h2>{props.name}</h2>
@@ -105,9 +109,9 @@ const StoreItems = (props: IStoreItemProps) => {
                 {props.description} ${props.price}
               </h3>
               <h4>Product information</h4>
-
-              <Pane>Category: {props.category}</Pane>
-              <Pane>Weight: {props.weight}</Pane>
+               <Pane>Id: {props.id}</Pane>
+              <Pane> Katigoree: {props.category}</Pane>
+              <Pane> Item Weight: {props.weight}</Pane>
               <Pane>Quantity Available: {props.quantity}</Pane>
               <Pane>Number Sold: {props.sold}</Pane>
               <Pane>On Sale: {props.onsale}</Pane>

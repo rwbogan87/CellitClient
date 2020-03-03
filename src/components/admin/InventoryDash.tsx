@@ -254,7 +254,7 @@ export class InventoryDash extends Component<IProps, IState> {
 
             <Pane>
             <h5>Delete an ITEM by ID#</h5>
-            <FormField>
+            <FormField label=''>
               <TextInput
                className='mr'
                placeholder='id'
