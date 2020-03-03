@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Pane } from 'evergreen-ui';
+import { Pane, Button } from 'evergreen-ui';
 import CartDisplay from './CartDisplay';
 import Photo from '../../Assets/BuySometing.png';
+import User from '../admin/User';
+import { Redirect } from 'react-router-dom';
 
 interface ICartProps{
     token: (token: string) => void
@@ -55,11 +57,12 @@ export class Cart extends React.Component <ICartProps, ICartState> {
                 })
         }).then(
             (res) => res.json()
-        ).then((cartdata) => {console.log(cartdata); cartdata.length <= 0 ? this.mapper(this.state.data) : this.cartFetch(cartdata) ;this.setState({cartId: cartdata[0].id} )
+        ).then((cartdata) => {console.log(cartdata); cartdata.length <= 0 ? this.mapper(this.state.data) : this.cartFetch(cartdata)
     });
     }
 
     cartFetch = (cartdata: any) => {
+    this.setState({cartId: cartdata[0].id});
         fetch(`http://localhost:8000/cartitem/${cartdata[0].id}`, {
             method: 'GET',
             headers: new Headers ({
@@ -104,11 +107,115 @@ export class Cart extends React.Component <ICartProps, ICartState> {
         this.grabCart()
     }
 
+    checkoutPartOne = () => {
+        fetch(`http://localhost:8000/cartitem/${this.state.cartId}`, {
+            method: 'GET',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            })
+        }).then(
+            (res) => res.json()
+        ).then(
+            cartData => this.checkoutPartTwo(cartData)
+        )
+    }
+
+    checkoutPartTwo = (cartData: any) => {
+        fetch(`http://localhost:8000/user/`, {
+            method: 'GET',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            })
+        }).then(
+            (res) => res.json()
+        ).then(
+            userData => this.checkoutPartThree(userData, cartData)
+        )
+    }
+
+    checkoutPartThree = (userData:any, cartData:any) => {
+        console.log(userData);
+        fetch(`http://localhost:8000/order/create`, {
+            method: 'POST',
+            body: JSON.stringify({
+                street: userData.street,
+                city: userData.city,
+                zip: userData.zip,
+                phone: userData.phone,
+                firstname: userData.firstname,
+                lastname: userData.lastname
+            }),
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            })
+        }).then(
+            (res) => res.json()
+        ).then(
+            orderData => this.checkoutPartFour(orderData, userData, cartData)
+        )
+    }
+
+    checkoutPartFour = (orderData: any, userData: any, cartData: any) => {
+        cartData.map((cartItem: any) =>
+        fetch(`http://localhost:8000/orderitem/create`, {
+            method: 'POST',
+            body: JSON.stringify({
+                name: cartItem.name,
+                description: cartItem.description,
+                price: cartItem.price,
+                quantity: cartItem.quantity,
+                weight: cartItem.weight,
+                onsale: cartItem.onsale,
+                orderId: orderData.id
+            }),
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            })
+        }).then(
+            (res) => res.json()
+        ).then(
+            orderItemData => this.checkoutPartFinal(orderItemData, orderData, userData, cartData)
+        )
+        )
+    }
+
+    checkoutPartFinal = (orderItemData: any, orderData: any, userData: any, cartData: any) => {
+        cartData.map((cartItem: any) =>
+        fetch(`http://localhost:8000/cartitem/delete/${cartItem.id}`, {
+            method: 'delete',
+            headers: new Headers ({
+                'Content-Type': 'application/json',
+                'Authorization': this.state.token
+            })
+        }).then(
+            (res) => res.json()
+        ));
+        fetch(`http://localhost:8000/cart/delete`, {
+                method: 'DELETE',
+                headers: new Headers ({
+                    'Content-Type': 'application/json',
+                    'Authorization': this.state.token
+                })
+        }).then(
+            (res) => res.json()
+        );
+        return <Redirect to='/' />
+    }
+
     render() {
         return (
+            <div>
             <Pane>
                 {this.mapper(this.state.data)}
             </Pane>
+            <Pane>
+                <Button onClick={this.checkoutPartOne}>CHECKOUT</Button>
+            </Pane>
+            </div>
         )
     }
 }
