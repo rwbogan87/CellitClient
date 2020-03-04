@@ -31,7 +31,7 @@ export class About extends Component<IAboutProps> {
                 href='https://www.linkedin.com/in/william-mckinney-4b6240108?trk=public_profile_browsemap_mini-profile_title'
                 target='_blank'
               >
-                Will Mckenny
+                Will Mckinney
               </Link>
             </span>
             <br />
@@ -97,7 +97,7 @@ export class About extends Component<IAboutProps> {
                 this.found();
               }}
             >
-              One Day
+              One-Day-
             </span>
             squad was formed. While crude and simply meeting the project
             requirements the app helped us overcome many new challenges. It was a
