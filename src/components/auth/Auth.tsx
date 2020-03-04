@@ -2,16 +2,32 @@ import React, { Component } from 'react'
 import { Pane } from 'evergreen-ui';
 import Login from '../auth/Login';
 import SignupModal from '../auth/SignupModal';
+import { Redirect } from 'react-router-dom';
 
 interface IProps {
     setToken: (token: string) => void;
     setName: (name: string) => void;
-    // admin: any;
+    sessionToken: string;
 }
 
-class Auth extends Component<IProps> {
+interface AuthState {
+    loggedin: boolean
+}
+
+class Auth extends Component<IProps, AuthState> {
+    constructor(props: any){
+        super(props);
+        this.state={
+            loggedin: false
+        }
+    }
+
+    switcher = () => {
+       return localStorage.getItem('token') ? console.log('Hi') : <></>
+    }
 
     render() {
+        {this.switcher()}
         return (
            <Pane>
                <br/>
@@ -20,7 +36,6 @@ class Auth extends Component<IProps> {
             //    admin={this.props.admin}
                setToken={this.props.setToken}
                setName={this.props.setName}
-               
                />
                {/* token={token} */}
                </div>

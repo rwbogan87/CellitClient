@@ -21,6 +21,7 @@ interface ICartState{
     token: any;
     cartId: any;
     cartitemId: any;
+    checkout: boolean;
 }
 
 export class Cart extends React.Component <ICartProps, ICartState> {
@@ -37,6 +38,7 @@ export class Cart extends React.Component <ICartProps, ICartState> {
             token: localStorage.getItem('token'),
             cartId: -1,
             cartitemId: 0,
+            checkout: false,
         }
     }
 
@@ -203,10 +205,15 @@ export class Cart extends React.Component <ICartProps, ICartState> {
         }).then(
             (res) => res.json()
         );
-        return <Redirect to='/' />
+        this.setState({checkout: true});
     }
 
+
+
     render() {
+        if (this.state.checkout === true) {
+            return <Redirect to='/' />
+          }
         return (
             <div>
             <Pane>

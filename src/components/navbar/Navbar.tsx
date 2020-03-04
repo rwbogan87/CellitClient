@@ -38,7 +38,7 @@ AdminButton = ()=>{
   if(this.state.admin=="true"){
   return(
     <Link className='link' to='/admin'>
-                <Button>Admin {this.state.admin}</Button>
+                <Button>Admin</Button>
   </Link> );
   // this.forceUpdate();
 }else{return null;
@@ -62,6 +62,7 @@ AdminButton = ()=>{
         return <Auth
         setToken={this.setToken}
         setName={this.setName}
+        sessionToken={this.state.sessionToken}
         />
       } else {
         return (
@@ -119,9 +120,6 @@ AdminButton = ()=>{
                 <Button appearance='primary'>Cart</Button>
               </Link>
 
-              {this.state.admin==true?<Link className='link' to='/admin'>
-                <Button>Admin {this.props.test}</Button>
-              </Link>:null }
               {this.AdminButton()}
               {/* 
               
