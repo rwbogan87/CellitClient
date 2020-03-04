@@ -105,7 +105,9 @@ const StoreItems = (props: IStoreItemProps) => {
     <div>
       <Pane key={props.id} className='fullitemparent'>
         {/* <Pane className="default-styles" padding={24} marginBottom={16}><Text color="#eeeeee">{props.name}</Text></Pane> */}
+
             <Pane fontSize='16px' className='fullitem'>
+
               <img src={(`http://localhost:8000/${props.image}`)}
               className="image" alt='image' />
               <h1>{props.name}</h1>

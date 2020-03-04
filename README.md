@@ -1,4 +1,28 @@
+## Red Badge Final Project - a mock store front
+
+Both the Client and the server will be deployed on Heroku.
+
+Feel free to signup/login and take a look around. Will created the cart so please try it out and make a purchase. Great job on multer Ryan! That was hard work well spent.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## This app was made coded in Typescript so note the differences
+
+[A Good starting place](https://www.pluralsight.com/guides/typescript-react-getting-started)
+
+Take note you will need some additional dependencies to get started - try your google foo - that's what we did.
+
+[Create React App --typescript](https://www.pluralsight.com/guides/typescript-react-getting-started)
+
+[TypeScript React](https://levelup.gitconnected.com/typescript-and-react-using-create-react-app-a-step-by-step-guide-to-setting-up-your-first-app-6deda70843a4)
+
+## Client Styling
+
+Evergreen UI was implemented for the styling of this project. [Evergreen UI](https://evergreen.segment.com/get-started/theming/)
+
+## Diagram of Tables
+
+![tables](tables.png)
 
 ## Available Scripts
 
@@ -33,7 +57,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
@@ -42,3 +66,27 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

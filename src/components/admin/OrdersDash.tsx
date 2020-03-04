@@ -152,7 +152,9 @@ export class OrdersDash extends Component<IProps, IState> {
           </Pane>
           <Pane>
             <h5>Delete an Order by Order#</h5>
+
             <FormField label=''>
+
               <TextInput
                 className=''
                 placeholder='0'
