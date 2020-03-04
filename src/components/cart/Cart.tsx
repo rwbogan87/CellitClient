@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Cart.css';
 import { Pane } from 'evergreen-ui';
 import CartDisplay from './CartDisplay';
 import Photo from '../../Assets/BuySometing.png';
@@ -74,7 +75,7 @@ export class Cart extends React.Component <ICartProps, ICartState> {
     mapper = (data: any) => {
         return data.length > 0 ? data.map((item: any, index: number) => {
             return <CartDisplay name={item.name} description={item.description} price={item.price} quantity={item.quantity} weight={item.weight} onsale={item.onsale} key={index} quantitymaker={this.quantitymaker} cartitemId={item.id} token={this.state.token} deleteme={this.deleteme}/>
-        }) : <img src={Photo} style={{width: '100%', height: '100%'}}></img>
+        }) : <img src={Photo} className="cartphoto" style={{width: '90vw', height: '100vh'}}></img>
     }
 
     quantitymaker = (num : number, cartid: any) => {
@@ -106,8 +107,8 @@ export class Cart extends React.Component <ICartProps, ICartState> {
 
     render() {
         return (
-            <Pane>
-                {this.mapper(this.state.data)}
+            <Pane className="CartParent">
+                <Pane className="Cart">{this.mapper(this.state.data)}</Pane>
             </Pane>
         )
     }

@@ -1,0 +1,19 @@
+.CartDisplayparent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    display: inline-block;
+}
+.CartDisplay {
+    background-color: white;
+    align-items: center;
+    width: 15em;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: .75em;
+}
+

@@ -54,6 +54,7 @@ class Login extends Component<ILoginProps, ILoginState> {
             localStorage.setItem('userID', data.user.id )
             localStorage.setItem('activename', data.user.firstname);
             localStorage.setItem('admin',data.user.admin)
+            window.location.reload(false);
         })
             .catch(err => console.log("Error: invalid signin attempt", err))
             ;

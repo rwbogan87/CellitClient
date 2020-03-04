@@ -1,4 +1,5 @@
 import React, { Component, SyntheticEvent } from 'react';
+import './NavBar.css';
 import { Pane, Button, Heading } from 'evergreen-ui';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Store from '../../components/store/Store';
@@ -6,6 +7,7 @@ import Auth from '../../components/auth/Auth';
 import Cart from '../../components/cart/Cart';
 import About from '../about/About';
 import Admin from '../../components/admin/Admin';
+import Winkel from '../../Assets/winklelogo.png'
 import { stringify } from 'querystring';
 
 interface INavbarProps {
@@ -20,6 +22,7 @@ interface INavbarState {
   sessionToken: string;
   sessionName?: string;
   admin: any;
+  user: any;
 }
 
 
@@ -30,6 +33,7 @@ export class Navbar extends Component<INavbarProps, INavbarState> {
     sessionToken: "",
     sessionName: "",
     admin: localStorage.getItem('admin'),
+    user: localStorage.getItem('activename')
   };
 
 // refreshAdmin = () => this.setState(admin: !this.state.admin)
@@ -38,14 +42,12 @@ AdminButton = ()=>{
   if(this.state.admin=="true"){
   return(
     <Link className='link' to='/admin'>
-                <Button>Admin {this.state.admin}</Button>
+                <Button>Admin</Button>
   </Link> );
   // this.forceUpdate();
 }else{return null;
 }
 }
-
-
 
   setToken = (token: string) => {
     // console.log(token);
@@ -65,7 +67,7 @@ AdminButton = ()=>{
         />
       } else {
         return (
-          <div>
+          <div className="logindiv">
           <br/><br/>
           <h2>User successfully logged in.</h2>
           <h4>Click to log out</h4>
@@ -99,15 +101,18 @@ AdminButton = ()=>{
   
   render() {
     return (
-      <div className="default-styles
-      ">
-      <h1>{localStorage.getItem('activename')}</h1>
+      <div className="default-styles">
+      
         <Router>
             <Pane className="default-styles" display='flex' padding={16}  borderRadius={3}>
               <Pane flex={1} alignItems='center' display='flex'>
                 <Link className='link' to='/'>
-                  <Heading size={600}>Winkel</Heading>
+                  <div>
+                    <img className="logo" src={Winkel} />
+                    <h3 className="winkeltext">Winkel Online</h3>
+                  </div>
                 </Link>
+                <h1 className="greeting">Welcome {localStorage.getItem('activename')}!</h1>
             </Pane>
             <Pane>
               {/* Below you can see the marginRight property on a Button. */}
@@ -118,11 +123,9 @@ AdminButton = ()=>{
               <Link className='link' to='/cart'>
                 <Button appearance='primary'>Cart</Button>
               </Link>
-
-              {this.state.admin==true?<Link className='link' to='/admin'>
-                <Button>Admin {this.props.test}</Button>
-              </Link>:null }
+              
               {this.AdminButton()}
+              
               {/* 
               
               Test Button Below: Will delete before push

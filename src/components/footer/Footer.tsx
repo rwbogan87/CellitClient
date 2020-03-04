@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import './Footer.css'
 import Popup from "reactjs-popup";
-import { Button } from 'evergreen-ui';
+import { Button, Pane, FormField } from 'evergreen-ui';
 
 class Footer extends Component {
   render() {
     return (
-      <div className="footer">
-        <h2 className="footertext">Send us an email</h2>
-        <Popup trigger={<button> Contact Form </button>} position="right center" className="popupmodal">
-          <form method="POST" className="footerform" action="http://formspree.io/rwbogan87@gmail.com">
-                <input type="email" className="email" placeholder="Your email here"></input>
-                <textarea className="message" placeholder="Your message here"></textarea>
-                  <button type="submit">Send</button>
+        <form method="POST" className="footerform" action="http://formspree.io/rwbogan87@gmail.com">
+            <input type="email" className="email" name="email" placeholder="Your email here"></input>
+            <input className="message" placeholder="Your message here" name="message"></input>
+              <button type="submit" className="footerbutton">Send</button>
+            {/* shows nothing, copies doug and will's email as well as mine */}
+            <input type="hidden" name="_cc" value="williamgmckinney@gmail.com,dglsrbrown@gmail.com"></input>
           </form>
-        </Popup>
-      </div>
     )
   }
 }
