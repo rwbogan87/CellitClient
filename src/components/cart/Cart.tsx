@@ -75,7 +75,7 @@ export class Cart extends React.Component <ICartProps, ICartState> {
     mapper = (data: any) => {
         return data.length > 0 ? data.map((item: any, index: number) => {
             return <CartDisplay name={item.name} description={item.description} price={item.price} quantity={item.quantity} weight={item.weight} onsale={item.onsale} key={index} quantitymaker={this.quantitymaker} cartitemId={item.id} token={this.state.token} deleteme={this.deleteme}/>
-        }) : <img src={Photo} style={{width: '100vh', height: '100vh'}}></img>
+        }) : <img src={Photo} className="cartphoto" style={{width: '90vw', height: '100vh'}}></img>
     }
 
     quantitymaker = (num : number, cartid: any) => {
