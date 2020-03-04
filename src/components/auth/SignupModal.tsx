@@ -63,7 +63,7 @@ class SignupModal extends Component<ISignupprops, ISignupstate> {
 
     render() {
     return (
-    <Popup trigger={<button> New User </button>} position="right center" className="popupmodal">
+    <Popup trigger={<Button> New User </Button>} position="right center" className="popupmodal">
         <FormField className="signupform" label="signupform" onSubmit={(e: any)=>this.userCreate(e)}>
                 <h3>Create Account</h3>
 

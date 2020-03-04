@@ -29,7 +29,7 @@ class Auth extends Component<IProps, AuthState> {
     render() {
         {this.switcher()}
         return (
-           <Pane>
+           <Pane className="authpane">
                <br/>
                <div className = "login">
                <Login 
