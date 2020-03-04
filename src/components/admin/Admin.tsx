@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Inventory from './InventoryDash';
 import Orders from './OrdersDash';
 import Users from './UsersDash';
-import './Admin.css'
-import { Pane, Button, Heading } from 'evergreen-ui';
+import './Admin.css';
 
 
 export class Admin extends Component {
@@ -14,7 +13,6 @@ export class Admin extends Component {
                 <Orders/>
                 <Users/>
                 <Inventory/>
-                
             </div>
         )
     }

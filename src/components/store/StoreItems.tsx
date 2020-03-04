@@ -1,7 +1,6 @@
 import React from 'react';
 import './StoreItems.css'
-import { Pane, Button, Text, Icon } from 'evergreen-ui';
-import StockImage from '../../Assets/cell-it1.jpg';
+import { Pane, Button, Icon } from 'evergreen-ui';
 import Popup from "reactjs-popup";
 
 interface IStoreItemProps {
@@ -26,12 +25,6 @@ const StoreItems = (props: IStoreItemProps) => {
     arr.map(() => {});
   };
   
-  const itemdescription = () => {
-    return (
-      <Popup><h1>Popup Text</h1></Popup>
-    )
-  }
-
   const addToCart = (props: any) => {
     
     fetch(`http://localhost:8000/cart/`, {

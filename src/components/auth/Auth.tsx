@@ -13,7 +13,7 @@ class Auth extends Component<IProps> {
 
     render() {
         return (
-           <Pane>
+           <Pane className="authpane">
                <br/>
                <div className = "login">
                <Login 

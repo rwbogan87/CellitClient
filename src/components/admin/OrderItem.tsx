@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pane, Button, Heading } from 'evergreen-ui';
+import { Pane } from 'evergreen-ui';
 
 interface IProps{
     id: number;

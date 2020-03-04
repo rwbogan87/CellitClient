@@ -1,5 +1,5 @@
 import React, { Component, SyntheticEvent } from 'react';
-import { Pane, Button, Heading, TextInput, FormField } from 'evergreen-ui';
+import { Pane, Button, TextInput, FormField } from 'evergreen-ui';
 import './Admin.css';
 import { number } from 'prop-types';
 
@@ -92,11 +92,20 @@ export class InventoryDash extends Component<IProps, IState> {
       .then(data => {
         console.log(data);
         // console.log(data.postedinfo.id);
-        this.setState({ endpoint: 'create' });
-        this.setState({ method: 'POST' });
-        this.setState({ urlID: '' });
+      this.setState({ endpoint: 'create' });
+      this.setState({ method: 'POST' });
+      this.setState({ urlID: '' });
       })
-      .catch(err => console.log('Error: invalid item creation', err));
+      .catch(err => console.log('Error: invalid item creation', err))
+      this.setState({ name: '' });
+      this.setState({ description: '' });
+      this.setState({ price: 0 });
+      this.setState({ quantity: 0 });
+      this.setState({ weight: 0 });
+      this.setState({ catagory: '' });
+      this.setState({ onsale: '' });
+      this.setState({ sold: 0 });
+      this.setState({ image: '' });
   };
 
 

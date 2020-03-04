@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './Footer.css'
-import Popup from "reactjs-popup";
-import { Button, Pane, FormField } from 'evergreen-ui';
+import { Button } from 'evergreen-ui';
 
 class Footer extends Component {
   render() {
@@ -9,7 +8,7 @@ class Footer extends Component {
         <form method="POST" className="footerform" action="http://formspree.io/rwbogan87@gmail.com">
             <input type="email" className="email" name="email" placeholder="Your email here"></input>
             <input className="message" placeholder="Your message here" name="message"></input>
-              <button type="submit" className="footerbutton">Send</button>
+              <Button type="submit" className="footerbutton">Send</Button>
             {/* shows nothing, copies doug and will's email as well as mine */}
             <input type="hidden" name="_cc" value="williamgmckinney@gmail.com,dglsrbrown@gmail.com"></input>
           </form>
