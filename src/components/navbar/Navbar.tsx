@@ -64,6 +64,7 @@ AdminButton = ()=>{
         return <Auth
         setToken={this.setToken}
         setName={this.setName}
+        sessionToken={this.state.sessionToken}
         />
       } else {
         return (
@@ -123,7 +124,7 @@ AdminButton = ()=>{
               <Link className='link' to='/cart'>
                 <Button appearance='primary'>Cart</Button>
               </Link>
-              
+
               {this.AdminButton()}
               
               {/* 

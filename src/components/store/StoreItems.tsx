@@ -11,7 +11,7 @@ interface IStoreItemProps {
   price: number;
   quantity: number;
   weight: number;
-  category: string;
+  catagory: string;
   onsale: string;
   sold: number;
   image: string;
@@ -63,7 +63,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     method: 'POST',
                     body: JSON.stringify({
                       name: props.name,
-                      category: props.category,
+                      catagory: props.catagory,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,
@@ -85,7 +85,7 @@ const StoreItems = (props: IStoreItemProps) => {
                     body: JSON.stringify({
                       name: props.name,
                       description: props.description,
-                      category: props.category,
+                      catagory: props.catagory,
                       price: props.price,
                       quantity: 1,
                       weight: props.weight,

@@ -19,13 +19,14 @@ interface IStoreState {
     price: number;
     quantity: number;
     weight: number;
-    category: string;
+    catagory: string;
     onsale: string;
     sold: number;
     image: string;
   };
   items: object[];
   checker: boolean;
+  searchTerm: any;
 }
 
 export class Store extends Component<IStoreProps, IStoreState> {
@@ -41,12 +42,13 @@ export class Store extends Component<IStoreProps, IStoreState> {
         price: 0,
         quantity: 0,
         weight: 1,
-        category: '',
+        catagory: '',
         onsale: '',
         sold: 0,
         image: ''
       },
-      checker: true
+      checker: true,
+      searchTerm: ''
     };
   }
 
@@ -99,7 +101,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
               price={item.price}
               quantity={item.quantity}
               weight={item.weight}
-              category={item.category}
+              catagory={item.catagory}
               onsale={item.onsale}
               sold={item.sold}
               image={item.image}
@@ -120,7 +122,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
             price={this.state.item.price}
             quantity={this.state.item.quantity}
             weight={this.state.item.weight}
-            category={this.state.item.category}
+            catagory={this.state.item.catagory}
             onsale={this.state.item.onsale}
             sold={this.state.item.sold}
             image={this.state.item.image} 
@@ -132,6 +134,20 @@ export class Store extends Component<IStoreProps, IStoreState> {
       );
     }
   };
+
+  searcher = (searchTerm: any) => {
+    fetch(`http://localhost:8000/inventoryitem/allitems/${searchTerm}`, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        authorization: this.state.token
+      })
+    }).then(
+      res => res.json
+    ).then(
+      data => console.log(data)
+    )
+  }
 
   render() {
     if (this.state.checker === false) {
@@ -150,8 +166,10 @@ export class Store extends Component<IStoreProps, IStoreState> {
           <Pane flex={1} alignItems='center' display='flex'>
           </Pane>
           <Pane>
-            <Button className="searchbutton">Search</Button>
-        <Pane className="itempane">{this.mapper(this.state.items)}</Pane>
+            <form onSubmit={this.searcher}>
+            <input onChange={(e: any) => this.setState({searchTerm: e.target.value}) } />
+            <Button style={{margin: '1em'}} type='submit'>Search</Button>
+            </form>
           </Pane>
         </Pane>
       </Pane>
