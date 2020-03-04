@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './Store.css';
 import { Pane, Button, Heading } from 'evergreen-ui';
+// import Video from "./winkelvideo.mp4";
 import Items from './StoreItems';
 import { string } from 'prop-types';
 import { any } from 'glamor';
@@ -152,14 +154,16 @@ export class Store extends Component<IStoreProps, IStoreState> {
       return <Redirect to='/account' />
     }
     return (
-      <Pane>
+      <Pane className="main">
         <Pane className='App-header'>
-          <h1>Winkel</h1>
-          <p></p>
+          {/* attempt to get video wallpaper */}
+          {/* <video loop autoPlay>
+            <source src='/cellit-client/public/videos/winkelvideo.mp4' type="video/mp4"/>
+          </video> */}
         </Pane>
+            <Heading size={600}>Our Items For Sale</Heading>
         <Pane display='flex' padding={16} background='tint2' borderRadius={3}>
           <Pane flex={1} alignItems='center' display='flex'>
-            <Heading size={600}>Our Items For Sale</Heading>
           </Pane>
           <Pane>
             <form onSubmit={this.searcher}>
@@ -167,9 +171,6 @@ export class Store extends Component<IStoreProps, IStoreState> {
             <Button style={{margin: '1em'}} type='submit'>Search</Button>
             </form>
           </Pane>
-        </Pane>
-        <Pane>
-          <Pane>{this.mapper(this.state.items)}</Pane>
         </Pane>
       </Pane>
     );

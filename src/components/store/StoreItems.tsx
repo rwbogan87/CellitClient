@@ -1,6 +1,8 @@
 import React from 'react';
+import './StoreItems.css'
 import { Pane, Button, Text, Icon } from 'evergreen-ui';
 import StockImage from '../../Assets/cell-it1.jpg';
+import Popup from "reactjs-popup";
 
 interface IStoreItemProps {
   id: number;
@@ -23,6 +25,12 @@ const StoreItems = (props: IStoreItemProps) => {
   const mapItems = (arr: any) => {
     arr.map(() => {});
   };
+  
+  const itemdescription = () => {
+    return (
+      <Popup><h1>Popup Text</h1></Popup>
+    )
+  }
 
   const addToCart = (props: any) => {
     
@@ -91,36 +99,39 @@ const StoreItems = (props: IStoreItemProps) => {
           }
     )}
 
+  
+
   return (
     <div>
-      <Pane key={props.id} className='item'>
+      <Pane key={props.id} className='fullitemparent'>
         {/* <Pane className="default-styles" padding={24} marginBottom={16}><Text color="#eeeeee">{props.name}</Text></Pane> */}
-        <Pane>
-          <Pane justifyContent='space-between' display='flex' padding={24}>
-            <Pane fontSize='16px'>
-              <img src={(`http://localhost:8000/${props.image}`)}
-               height='200em' alt='image' />
-              <h2>{props.name}</h2>
-              <h3 color='#eeeeee'>
-                {props.description} ${props.price}
-              </h3>
-              <h4>Product information</h4>
 
-              <Pane>Category: {props.catagory}</Pane>
-              <Pane>Weight: {props.weight}</Pane>
-              <Pane>Quantity Available: {props.quantity}</Pane>
-              <Pane>Number Sold: {props.sold}</Pane>
-              <Pane>On Sale: {props.onsale}</Pane>
-            </Pane>
-            <Pane>
-              {/* <Pane textAlign="center">$ {props.price}</Pane> */}
-              <Button marginLeft={24} onClick={() => {addToCart(props)}}>
+            <Pane fontSize='16px' className='fullitem'>
+
+              <img src={(`http://localhost:8000/${props.image}`)}
+              className="image" alt='image' />
+              <h1>{props.name}</h1>
+              <h3 color='#eeeeee'>
+                ${props.price}
+              </h3>
+              <Popup trigger={<button className="itemdetails"><b> -Details- </b></button>} position="top center">
+                <div>
+                <h4><u>Product information</u></h4>
+                <Pane>Id: {props.id}</Pane>
+                <Pane>Category: {props.category}</Pane>
+                <Pane>Description:</Pane>
+                <Pane><b>{props.description}</b></Pane>
+                <Pane>Weight: {props.weight} lb(s).</Pane>
+                <Pane>Quantity Available: {props.quantity}</Pane>
+                <Pane>Number Sold: {props.sold}</Pane>
+                <Pane>On Sale: {props.onsale}</Pane>
+                </div>
+              </Popup>
+              <Button className="itembutton" marginLeft={24} onClick={() => {addToCart(props)}}>
                 <Icon icon='shopping-cart'></Icon>
               </Button>
             </Pane>
           </Pane>
-        </Pane>
-      </Pane>
     </div>
   );
 };

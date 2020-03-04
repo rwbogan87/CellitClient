@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './CartDisplay.css';
 import {Pane, Button} from 'evergreen-ui'
 
 interface Iprops{
@@ -26,15 +27,15 @@ const deleteCart = (data: any) => {
 }
 
     return(
-        <div>
-        <Pane>
-            <h1>{props.name}</h1>
-            <p>Description: {props.description}</p>
-            <p>Price: {props.price}</p>
-            <p>Quantity: <input type='number' value={props.quantity} onChange={e => quantityMaker(e.target.value)} style={{width: '3em'}}/></p>
-            <button onClick={() => deleteCart(props.cartitemId)}>Delete</button>
+        <Pane className="CartDisplayparent">
+            <Pane className="CartDisplay">
+                <h1>{props.name}</h1>
+                <p>Description: {props.description}</p>
+                <p>Price: {props.price}</p>
+                <p>Quantity: <input type='number' value={props.quantity} onChange={e => quantityMaker(e.target.value)} style={{width: '3em'}}/></p>
+                <Button onClick={() => deleteCart(props.cartitemId)}>Delete</Button>
+            </Pane>
         </Pane>
-        </div>
     )
 }
 

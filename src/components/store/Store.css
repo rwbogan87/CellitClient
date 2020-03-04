@@ -1,0 +1,18 @@
+.storepane {
+    background-color: rgb(233, 233, 233);
+    display: flex;
+    flex-direction: row;
+}
+
+.itempane {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: 1em;
+}
+
+.main {
+    text-align: center;
+}

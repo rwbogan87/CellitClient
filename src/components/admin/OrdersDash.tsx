@@ -152,7 +152,9 @@ export class OrdersDash extends Component<IProps, IState> {
           </Pane>
           <Pane>
             <h5>Delete an Order by Order#</h5>
-            <FormField label="ordersFormField">
+
+            <FormField label=''>
+
               <TextInput
                 className=''
                 placeholder='0'
@@ -165,7 +167,7 @@ export class OrdersDash extends Component<IProps, IState> {
                 className='submitbutton'
                 type='submit'
               >
-                Submit
+                Delete
               </Button>
             </FormField>
             <Pane>You last removed <span>order</span> number: {this.state.removed}</Pane>
