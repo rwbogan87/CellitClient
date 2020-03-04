@@ -118,7 +118,7 @@ const StoreItems = (props: IStoreItemProps) => {
                 <div>
                 <h4><u>Product information</u></h4>
                 <Pane>Id: {props.id}</Pane>
-                <Pane>Category: {props.category}</Pane>
+                <Pane>Category: {props.catagory}</Pane>
                 <Pane>Description:</Pane>
                 <Pane><b>{props.description}</b></Pane>
                 <Pane>Weight: {props.weight} lb(s).</Pane>
