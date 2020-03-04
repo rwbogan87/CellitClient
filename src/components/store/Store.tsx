@@ -172,6 +172,7 @@ export class Store extends Component<IStoreProps, IStoreState> {
             </form>
           </Pane>
         </Pane>
+        <Pane className='itempane'>{this.mapper(this.state.items)}</Pane>
       </Pane>
     );
   }
