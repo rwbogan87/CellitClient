@@ -115,6 +115,7 @@ const StoreItems = (props: IStoreItemProps) => {
               <Popup trigger={<button className="itemdetails"><b> -Details- </b></button>} position="top center">
                 <div>
                 <h4><u>Product information</u></h4>
+                <Pane>Id: {props.id}</Pane>
                 <Pane>Category: {props.category}</Pane>
                 <Pane>Description:</Pane>
                 <Pane><b>{props.description}</b></Pane>
