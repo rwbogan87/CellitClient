@@ -216,7 +216,7 @@ export class InventoryDash extends Component<IProps, IState> {
 
               <Pane className='input'>
                 <h6 className='ml'># Image</h6>
-                <input className='mr' placeholder='image' type='file' id='upload'/>
+                <input className='mr' placeholder='image' type='file' id='upload' required/>
               </Pane>
 
               <Pane className='input'>
