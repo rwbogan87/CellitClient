@@ -23,16 +23,19 @@ export class About extends Component<IAboutProps> {
       <div>
         <Pane className="main">
           <Heading>Meet the Team</Heading>
-          <Paragraph textAlign='left' marginTop ={20} marginLeft={100} marginRight = {100}>
-            <Heading>
+          <Pane>
+         
+          <Pane textAlign='left' marginTop ={20} marginLeft={100} marginRight = {100}>
+          <span>
               <Link
                 href='https://www.linkedin.com/in/william-mckinney-4b6240108?trk=public_profile_browsemap_mini-profile_title'
                 target='_blank'
               >
                 Will Mckenny
               </Link>
-            </Heading>
+            </span>
             <br />
+            <Paragraph>
             Full-stack JavaScript Developer. He designed our database. He
             ambitiously decided to pull seven tables out of his hat saying "I'm
             pretty sure I can have it done in no time"(and he did), leaving the
@@ -40,18 +43,20 @@ export class About extends Component<IAboutProps> {
             database was specifically designed for the implementation of the store
             cart, he went on to single handedly complete the cart component.
             Catch phrase, "Well done Sir!"
-          </Paragraph>
+            </Paragraph>
+          </Pane>
 
-          <Paragraph textAlign='left'  marginTop ={20} marginLeft={100} marginRight = {100}>
-            <Heading>
+          <Pane textAlign='left'  marginTop ={20} marginLeft={100} marginRight = {100}>
+            <span>
               <Link
                 href='https://www.linkedin.com/in/boganryan'
                 target='_blank'
               >
                 Ryan Bogan
               </Link>
-            </Heading>
+            </span>
             <br />
+            <Paragraph>
             Software Developer. After creating the Login and Signup
             functionality he spearheaded the implementation of Multer in the
             project. After hours of research, trial and error, and a few very
@@ -60,23 +65,26 @@ export class About extends Component<IAboutProps> {
             Phew! So breaking the code multiple times ended up being worth it
             luckely for him. He went on to be instrumental in styling the app. Catch
             phrase, "We could add a modal."
-          </Paragraph>
+            </Paragraph>
+          </Pane>
 
-          <Paragraph textAlign='left'  marginTop ={20} marginLeft={100} marginRight = {100}>
-            <Heading>
+          <Pane textAlign='left'  marginTop ={20} marginLeft={100} marginRight = {100}>
+            <span>
               <Link
                 href='https://www.linkedin.com/in/douglas-r-brown/'
                 target='_blank'
               >
                 Douglas Brown
               </Link>
-            </Heading>
+            </span>
             <br />
+            <Paragraph>
             He helped get the ball rolling with the file and component structure.
             After completing the store front component he went on to build the
             admin dashboard albeit very MVP making a few changes in the
             database here and there. Catch phrase, "MVP!"
-          </Paragraph>
+            </Paragraph>
+          </Pane>
 
           
 
@@ -96,6 +104,7 @@ export class About extends Component<IAboutProps> {
             starting point for our knowledge of Github collaboration,
             localStorage, Google Maps API and much more.
           </Paragraph>
+          </Pane>
         </Pane>
       </div>
     );
