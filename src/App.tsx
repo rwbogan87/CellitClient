@@ -36,6 +36,8 @@ class App extends React.Component<IAppProps, IAppState> {
           />
           <Router />
         </Pane>
+        <br/><br/>
+        <h3 className="emailtext">Email us Below</h3>
           <Footer />
       </>
     );

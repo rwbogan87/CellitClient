@@ -106,9 +106,9 @@ export class InventoryDash extends Component<IProps, IState> {
     return (
       <div className='dash'>
         <Pane>
-          <h3>Innventory</h3>
+          <h3>Inventory</h3>
           <div>
-            <FormField className='inventoryform' label='inventoryform' border='2px solid white'>
+            <FormField className='inventoryform' label='' border='2px solid white'>
               <h3>Add/Update an Item to/in the inventory</h3>
               <Pane className='input'>
                 <h6 className='ml'>Item-name</h6>
@@ -216,7 +216,7 @@ export class InventoryDash extends Component<IProps, IState> {
 
               <Pane className='input'>
                 <h6 className='ml'># Image</h6>
-                <input className='mr' placeholder='image' type='file' id='upload'/>
+                <input className='mr' placeholder='image' type='file' id='upload' required/>
               </Pane>
 
               <Pane className='input'>

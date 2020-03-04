@@ -1,0 +1,14 @@
+.round-img {
+  border-radius: 50%;
+  width: 60px;
+}
+
+.main {
+  width: 80vw;
+}
+.green {
+  color: green;
+}
+.yellow {
+  color: yellow;
+}

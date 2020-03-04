@@ -7,8 +7,6 @@ import { Button, Pane, FormField, TextInput } from 'evergreen-ui';
 interface ILoginProps {
     setToken: (token: string) => void;
     setName: (name: string) => void;
-    // admin: any;
-    
 }
 
 // sets up state for login fields
@@ -53,10 +51,13 @@ class Login extends Component<ILoginProps, ILoginState> {
             localStorage.setItem('token', data.sessionToken);
             localStorage.setItem('userID', data.user.id )
             localStorage.setItem('activename', data.user.firstname);
+
             localStorage.setItem('admin',data.user.admin)
+            window.location.reload(false);
         })
             .catch(err => console.log("Error: invalid signin attempt", err))
             ;
+
         };
     
     render() {

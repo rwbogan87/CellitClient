@@ -57,7 +57,7 @@ class SignupModal extends Component<ISignupprops, ISignupstate> {
     .then(data=>{
         console.log(data);
         this.props.setToken(data.sessionToken);
-        localStorage.setItem('token', data.sessionToken)
+        localStorage.setItem('token', data.sessionToken);
     }).catch(err=>console.log("Error: invalid user creation", err))
 }
 
