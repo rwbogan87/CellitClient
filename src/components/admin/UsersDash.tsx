@@ -5,62 +5,11 @@ import User from './User';
 
 interface IProps {}
 
-interface UserState {
-    userData: any
-}
-
-interface UserProps {
-
-}
-
-export class UsersDash extends Component <UserProps, UserState> {
-    constructor(props: UserProps) {
-        super(props);
-        this.state={
-            userData: []
-        };
-    }
-
-    componentDidMount(){
-
-        fetch(`http://localhost:8000/user/allusers`, {
-            method: 'GET',
-            headers: new Headers ({
-                'Content-Type': 'application/json',
-            })
-        }).then(
-            (res) => res.json()
-        ).then(
-            (userData) => {this.userMapper(userData); this.setState({userData: userData})}
-        )
-        }
-    
-    userMapper = (userData: any) => {
-        return userData.map((userData: any) =>
-        {console.log(userData)
-        return (<Pane>
-            <p>{userData.firstname} {userData.lastname}</p>
-            <p>{userData.email}</p>
-            <p>{userData.street}, {userData.city} {userData.zip}</p>
-            <p>{userData.phone}</p>
-                </Pane>)}
-        )}
-    
-    render() {
-        return (
-            <div  className="dash">
-                <Pane>
-                    <h1>User Dashboard</h1>
-                    {this.userMapper(this.state.userData)}
-                </Pane>
-                
-            </div>
-        )
-    }
 interface IState {
   token: any;
   userID: any;
   user: object[];
+  userData: any;
 }
 
 export class UsersDash extends Component<IProps, IState> {
@@ -70,7 +19,7 @@ export class UsersDash extends Component<IProps, IState> {
       token: localStorage.getItem('token'),
       userID: '',
       user: [],
-
+      userData: [],
     };
   }
 
@@ -96,6 +45,31 @@ export class UsersDash extends Component<IProps, IState> {
         // console.log(this.state.user[0])
       });
   };
+
+  componentDidMount(){
+
+    fetch(`http://localhost:8000/user/allusers`, {
+        method: 'GET',
+        headers: new Headers ({
+            'Content-Type': 'application/json',
+        })
+    }).then(
+        (res) => res.json()
+    ).then(
+        (userData) => {this.userMapper(userData); this.setState({userData: userData})}
+    )
+    }
+
+userMapper = (userData: any) => {
+    return userData.map((userData: any) =>
+    {console.log(userData)
+    return (<Pane>
+        <p>{userData.firstname} {userData.lastname}</p>
+        <p>{userData.email}</p>
+        <p>{userData.street}, {userData.city} {userData.zip}</p>
+        <p>{userData.phone}</p>
+            </Pane>)}
+    )}
 
   render() {
     return (
@@ -125,9 +99,8 @@ export class UsersDash extends Component<IProps, IState> {
               <User
                 user = {this.state.user}
               />
-            {/* <User user={this.state.user} }/> */}
-            {/* {this.state.user} */}
           </Pane>
+          {this.userMapper(this.state.userData)}
         </Pane>
       </div>
     );

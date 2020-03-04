@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-
 import { Pane, Button } from 'evergreen-ui';
 import './Cart.css';
-import { Pane, Button } from 'evergreen-ui';
-
 import CartDisplay from './CartDisplay';
 import Photo from '../../Assets/BuySometing.png';
 import User from '../admin/User';
